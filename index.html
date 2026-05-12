@@ -5,166 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>FENABS Pro | Liga Nacional 2026</title>
+    <title>FENABS Pro Hub | Grupo Norte</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #020617; }
-        h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); }
-        .card-gradient { background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); }
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: white; }
+        h1, h2, h3, .font-syne { font-family: 'Syne', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); }
+        .tab-active { color: #22c55e; border-bottom: 2px solid #22c55e; }
+        .card-team { transition: all 0.3s ease; }
+        .card-team:hover { transform: translateY(-5px); border-color: #22c55e; }
     </style>
 </head>
-<body class="text-slate-100">
+<body>
 
-    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-800">
+    <nav class="fixed top-0 w-full z-[60] glass border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <h1 class="text-xl font-black italic tracking-tighter uppercase text-green-500">FENABS <span class="text-white">2026</span></h1>
-            <div id="status-tag" class="text-[10px] bg-green-500/10 text-green-500 px-3 py-1 rounded-full border border-green-500/20 font-bold">ACTUALIZADO: --/--</div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center font-black text-black italic">FN</div>
+                <h1 class="text-xl font-extrabold uppercase tracking-tighter">BASEBALL<span class="text-green-500">HUB</span></h1>
+            </div>
+            <div id="status-tag" class="hidden md:block text-[10px] text-slate-500 font-mono">SYNC: --:--</div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 flex gap-8 border-t border-slate-800/50">
+            <button onclick="switchTab('home')" id="tab-home" class="tab-btn py-4 text-xs font-bold uppercase tracking-widest tab-active">Inicio</button>
+            <button onclick="switchTab('equipos')" id="tab-equipos" class="tab-btn py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Equipos</button>
+            <button onclick="switchTab('jugadores')" id="tab-jugadores" class="tab-btn py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Jugadores</button>
         </div>
     </nav>
 
-    <header class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-        <h2 class="text-7xl md:text-9xl font-extrabold italic tracking-tighter uppercase leading-none mb-6">
-            Liga <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Nacional</span>
-        </h2>
-        <p class="text-slate-400 text-lg max-w-xl border-l-4 border-green-500 pl-6">Resultados y analíticas avanzadas del Grupo Norte. Datos extraídos directamente de la federación.</p>
-    </header>
+    <main class="pt-44 pb-20 max-w-7xl mx-auto px-6">
 
-    <section id="clasificacion" class="max-w-7xl mx-auto px-6 mb-32">
-        <div class="overflow-x-auto rounded-3xl border border-slate-800 shadow-2xl">
-            <table class="w-full text-left">
-                <thead class="bg-slate-900 text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em]">
-                    <tr>
-                        <th class="p-6">Pos</th>
-                        <th class="p-6">Equipo</th>
-                        <th class="p-6 text-center">PJ</th>
-                        <th class="p-6 text-center">G</th>
-                        <th class="p-6 text-center">P</th>
-                        <th class="p-6 text-center text-green-400">AVG</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla-body" class="bg-slate-900/40"></tbody>
-            </table>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-6 pb-32">
-        <h3 class="text-4xl font-black mb-12 italic uppercase tracking-tighter">Top Performers</h3>
-        <div id="grid-jugadores" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-    </section>
-
-    <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl">
-        <div class="bg-slate-900 w-full max-w-5xl rounded-[40px] border border-slate-800 overflow-hidden relative shadow-2xl">
-            <button onclick="closeModal()" class="absolute top-8 right-8 z-10 text-slate-400 hover:text-white transition">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
-            </button>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="p-12 border-r border-slate-800">
-                    <p id="m-equipo" class="text-green-500 font-bold uppercase tracking-widest text-sm mb-2"></p>
-                    <h3 id="m-nombre" class="text-5xl font-black uppercase italic mb-8 tracking-tighter"></h3>
-                    <div class="grid grid-cols-3 gap-4 mb-8">
-                        <div class="bg-slate-800 p-6 rounded-3xl text-center">
-                            <p id="m-label-1" class="text-[10px] text-slate-500 font-bold mb-1 uppercase"></p>
-                            <p id="m-stat-1" class="text-3xl font-black italic"></p>
-                        </div>
-                        <div class="bg-slate-800 p-6 rounded-3xl text-center border border-green-500/30">
-                            <p class="text-[10px] text-slate-500 font-bold mb-1 uppercase">HITS / SO</p>
-                            <p id="m-stat-2" class="text-3xl font-black italic"></p>
-                        </div>
-                        <div class="bg-slate-800 p-6 rounded-3xl text-center">
-                            <p class="text-[10px] text-slate-500 font-bold mb-1 uppercase">RBI</p>
-                            <p id="m-stat-3" class="text-3xl font-black italic"></p>
-                        </div>
-                    </div>
-                    <div class="h-64 bg-slate-800/30 rounded-3xl p-6 border border-slate-800">
-                        <canvas id="chartLine"></canvas>
+        <div id="view-home" class="tab-view">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2">
+                    <h2 class="text-4xl font-black italic mb-8 uppercase italic underline decoration-green-500 underline-offset-8">Clasificación General</h2>
+                    <div class="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/40">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-900 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                                <tr>
+                                    <th class="p-6">Pos</th>
+                                    <th class="p-6">Equipo</th>
+                                    <th class="p-6 text-center">G-P</th>
+                                    <th class="p-6 text-center text-green-400">AVG</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-cla"></tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="p-12 bg-slate-900/50 flex flex-col justify-center">
-                    <h4 class="text-center text-slate-500 font-bold uppercase text-xs mb-8">Análisis Competitivo</h4>
-                    <div class="h-80"><canvas id="chartRadar"></canvas></div>
+                <div>
+                    <h2 class="text-2xl font-black italic mb-8 uppercase">Líderes</h2>
+                    <div id="destacados-mini" class="space-y-4"></div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div id="view-equipos" class="tab-view hidden">
+            <h2 class="text-5xl font-black italic mb-12 uppercase">Nuestros Equipos</h2>
+            <div id="grid-equipos" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                </div>
+        </div>
+
+        <div id="view-jugadores" class="tab-view hidden">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+                <div>
+                    <h2 class="text-5xl font-black italic uppercase">Rosters</h2>
+                    <p class="text-slate-500">Busca por nombre o filtra por equipo</p>
+                </div>
+                <div class="flex gap-4 w-full md:w-auto">
+                    <input type="text" id="buscador" onkeyup="filtrarJugadores()" placeholder="Buscar jugador..." class="bg-slate-900 border border-slate-700 rounded-xl px-6 py-3 w-full md:w-64 focus:outline-none focus:border-green-500 transition">
+                    <select id="filtro-equipo" onchange="filtrarJugadores()" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-green-500 transition text-sm">
+                        <option value="todos">Todos los Equipos</option>
+                    </select>
+                </div>
+            </div>
+            <div id="grid-full-jugadores" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
+        </div>
+
+    </main>
+
+    <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-950/95 backdrop-blur-xl">
+        </div>
 
     <script>
-        let lineChart, radarChart;
+        let ligaData = {};
 
         async function init() {
             const res = await fetch('liga_data.json');
-            const data = await res.json();
-            document.getElementById('status-tag').innerText = `ACTUALIZADO: ${data.actualizado}`;
+            ligaData = await res.json();
+            document.getElementById('status-tag').innerText = `SYNC: ${ligaData.actualizado}`;
 
-            // Clasificación
-            const tabla = document.getElementById('tabla-body');
-            data.clasificacion.forEach(eq => {
+            renderHome();
+            renderEquipos();
+            renderJugadores();
+            poblarFiltroEquipos();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active', 'text-white'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('text-slate-400'));
+            
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('tab-active', 'text-white');
+        }
+
+        function renderHome() {
+            const tabla = document.getElementById('tabla-cla');
+            ligaData.clasificacion.forEach(eq => {
                 tabla.innerHTML += `
                     <tr class="border-t border-slate-800 hover:bg-slate-800/30 transition">
                         <td class="p-6 font-bold text-slate-500">${eq.pos}</td>
                         <td class="p-6 font-black uppercase italic">${eq.equipo}</td>
-                        <td class="p-6 text-center text-slate-400">${eq.pj}</td>
-                        <td class="p-6 text-center font-bold text-green-500">${eq.pg}</td>
-                        <td class="p-6 text-center font-bold text-red-500">${eq.pp}</td>
+                        <td class="p-6 text-center font-bold text-green-500">${eq.pg}-${eq.pp}</td>
                         <td class="p-6 text-center font-mono text-green-400">${eq.avg}</td>
                     </tr>`;
             });
 
-            // Jugadores
-            const grid = document.getElementById('grid-jugadores');
-            [...data.top_bateadores, ...data.top_lanzadores].forEach(p => {
-                grid.innerHTML += `
-                    <div onclick='openModal(${JSON.stringify(p)})' class="card-gradient p-8 rounded-[32px] border border-slate-800 hover:border-green-500 transition-all cursor-pointer group">
-                        <p class="text-xs font-bold text-slate-500 uppercase mb-2 tracking-widest">${p.equipo}</p>
-                        <h4 class="text-3xl font-black italic uppercase mb-6 group-hover:text-green-500 transition">${p.nombre}</h4>
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <p class="text-[10px] text-slate-400 font-bold uppercase">${p.tipo}</p>
-                                <p class="text-5xl font-black italic text-white">${p.stat}</p>
-                            </div>
-                            <div class="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center group-hover:bg-green-500 group-hover:text-black transition">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-width="3"/></svg>
-                            </div>
+            const mini = document.getElementById('destacados-mini');
+            ligaData.top_bateadores.slice(0, 4).forEach(p => {
+                mini.innerHTML += `
+                    <div class="flex items-center gap-4 p-4 bg-slate-900/50 border border-slate-800 rounded-2xl">
+                        <div class="text-2xl font-black italic text-green-500">${p.stat}</div>
+                        <div>
+                            <div class="text-sm font-bold uppercase tracking-tight">${p.nombre}</div>
+                            <div class="text-[10px] text-slate-500 font-bold uppercase">${p.equipo}</div>
                         </div>
                     </div>`;
             });
         }
 
-        function openModal(p) {
-            document.getElementById('m-nombre').innerText = p.nombre;
-            document.getElementById('m-equipo').innerText = p.equipo;
-            document.getElementById('m-stat-1').innerText = p.stat;
-            document.getElementById('m-label-1').innerText = p.tipo;
-            document.getElementById('m-stat-2').innerText = p.h || p.so || '0';
-            document.getElementById('m-stat-3').innerText = p.rbi || '-';
+        function renderEquipos() {
+            const grid = document.getElementById('grid-equipos');
+            const equiposUnicos = [...new Set(ligaData.top_bateadores.map(p => p.equipo))];
             
-            document.getElementById('modal').classList.replace('hidden', 'flex');
-            renderCharts(p.puntos);
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.replace('flex', 'hidden');
-            if(lineChart) lineChart.destroy();
-            if(radarChart) radarChart.destroy();
-        }
-
-        function renderCharts(puntos) {
-            lineChart = new Chart(document.getElementById('chartLine'), {
-                type: 'line',
-                data: {
-                    labels: ['G1', 'G2', 'G3', 'G4', 'G5'],
-                    datasets: [{ label: 'Rendimiento', data: puntos, borderColor: '#22c55e', tension: 0.4, fill: true, backgroundColor: 'rgba(34, 197, 94, 0.1)' }]
-                },
-                options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } }
+            equiposUnicos.forEach(eq => {
+                grid.innerHTML += `
+                    <div onclick="verEquipo('${eq}')" class="card-team p-8 bg-slate-900 border border-slate-800 rounded-[32px] cursor-pointer">
+                        <div class="w-16 h-16 bg-slate-800 rounded-2xl mb-6 flex items-center justify-center font-black text-2xl italic text-green-500">${eq[0]}</div>
+                        <h4 class="text-2xl font-black italic uppercase">${eq}</h4>
+                        <p class="text-slate-500 text-sm mt-2 font-bold uppercase tracking-widest">Grupo Norte</p>
+                        <div class="mt-6 flex gap-2">
+                             <span class="text-[10px] bg-slate-800 px-3 py-1 rounded-full font-bold">ROSTER</span>
+                             <span class="text-[10px] bg-slate-800 px-3 py-1 rounded-full font-bold">STATS</span>
+                        </div>
+                    </div>`;
             });
+        }
 
-            radarChart = new Chart(document.getElementById('chartRadar'), {
-                type: 'radar',
-                data: {
-                    labels: ['Poder', 'Velocidad', 'Contacto', 'Defensa', 'Brazo'],
-                    datasets: [{ data: [85, 70, 90, 65, 80], borderColor: '#22c55e', backgroundColor: 'rgba(34, 197, 94, 0.2)' }]
-                },
-                options: { plugins: { legend: { display: false } }, scales: { r: { angleLines: { color: '#334155' }, grid: { color: '#334155' }, pointLabels: { color: '#94a3b8' }, ticks: { display: false } } } }
+        function verEquipo(equipo) {
+            document.getElementById('filtro-equipo').value = equipo;
+            switchTab('jugadores');
+            filtrarJugadores();
+        }
+
+        function poblarFiltroEquipos() {
+            const selector = document.getElementById('filtro-equipo');
+            const equipos = [...new Set(ligaData.top_bateadores.map(p => p.equipo))];
+            equipos.forEach(eq => {
+                selector.innerHTML += `<option value="${eq}">${eq}</option>`;
+            });
+        }
+
+        function renderJugadores() {
+            const grid = document.getElementById('grid-full-jugadores');
+            grid.innerHTML = '';
+            ligaData.top_bateadores.forEach(p => {
+                grid.innerHTML += `
+                    <div class="player-item bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-green-500 transition group" data-nombre="${p.nombre.toLowerCase()}" data-equipo="${p.equipo}">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase mb-1">${p.equipo}</p>
+                        <h4 class="font-black italic uppercase text-lg group-hover:text-green-500 transition mb-4">${p.nombre}</h4>
+                        <div class="flex justify-between border-t border-slate-800 pt-4">
+                            <div><p class="text-[9px] text-slate-500 font-bold uppercase">AVG</p><p class="font-bold">${p.stat}</p></div>
+                            <div><p class="text-[9px] text-slate-500 font-bold uppercase">H</p><p class="font-bold">${p.h}</p></div>
+                            <div><p class="text-[9px] text-slate-500 font-bold uppercase">RBI</p><p class="font-bold">${p.rbi}</p></div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function filtrarJugadores() {
+            const busqueda = document.getElementById('buscador').value.toLowerCase();
+            const equipo = document.getElementById('filtro-equipo').value;
+            
+            document.querySelectorAll('.player-item').forEach(el => {
+                const nombreMatch = el.getAttribute('data-nombre').includes(busqueda);
+                const equipoMatch = equipo === 'todos' || el.getAttribute('data-equipo') === equipo;
+                
+                if (nombreMatch && equipoMatch) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
             });
         }
 
