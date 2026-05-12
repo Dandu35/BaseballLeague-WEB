@@ -2,61 +2,58 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>FENABS Pro Analysis 2026</title>
+    <title>FENABS Advanced Stats</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@400;700&display=swap');
         body { font-family: 'Inter', sans-serif; background: #020617; color: white; }
-        .font-syne { font-family: 'Syne', sans-serif; }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="p-4 md:p-8">
 
-    <nav class="max-w-7xl mx-auto flex justify-between items-center mb-16">
-        <h1 class="text-3xl font-black italic uppercase tracking-tighter text-green-500">FN <span class="text-white">HUB</span></h1>
-        <div id="update-time" class="text-[10px] opacity-50 font-mono"></div>
-    </nav>
-
-    <main class="max-w-7xl mx-auto">
-        <div class="flex gap-4 mb-12 overflow-x-auto pb-4">
-            <button onclick="showSection('cla')" class="bg-slate-900 px-6 py-3 rounded-2xl border border-slate-800 font-bold hover:border-green-500 transition text-sm">Clasificación</button>
-            <button onclick="showSection('jug')" class="bg-slate-900 px-6 py-3 rounded-2xl border border-slate-800 font-bold hover:border-green-500 transition text-sm">Jugadores</button>
+    <header class="max-w-6xl mx-auto mb-12 flex justify-between items-end">
+        <div>
+            <h1 class="text-4xl font-black italic uppercase text-green-500">FN HUB</h1>
+            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Análisis Situacional Grupo Norte</p>
         </div>
+        <div id="update-info" class="text-[10px] font-mono opacity-40"></div>
+    </header>
 
-        <div id="sec-cla" class="section">
-            <div class="bg-slate-900 rounded-[32px] border border-slate-800 overflow-hidden shadow-2xl">
-                <table class="w-full text-left">
-                    <thead class="bg-slate-800/50 text-[10px] uppercase font-bold text-slate-500">
-                        <tr><th class="p-6">#</th><th class="p-6">Equipo</th><th class="p-6">G-P</th><th class="p-6">AVG</th></tr>
-                    </thead>
-                    <tbody id="body-cla"></tbody>
-                </table>
-            </div>
-        </div>
+    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6" id="main-grid"></main>
 
-        <div id="sec-jug" class="section hidden">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="grid-jug"></div>
-        </div>
-    </main>
-
-    <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/98 backdrop-blur-xl p-4">
-        <div class="bg-slate-900 w-full max-w-5xl rounded-[40px] border border-slate-800 overflow-hidden relative shadow-2xl">
-            <button onclick="closeModal()" class="absolute top-8 right-8 text-slate-500 hover:text-white">✕</button>
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="p-12 border-r border-slate-800">
-                    <p id="m-eq" class="text-green-500 font-bold uppercase text-xs mb-2"></p>
-                    <h2 id="m-nom" class="text-5xl font-black italic uppercase tracking-tighter mb-8"></h2>
-                    <div class="space-y-4 bg-slate-800/50 p-8 rounded-3xl border border-slate-700">
-                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mb-4 text-center">Batting Analysis</p>
-                        <div class="flex justify-between text-sm"><span>vs Right Hand</span> <span id="m-vs-r" class="font-bold"></span></div>
-                        <div class="flex justify-between text-sm"><span>w/ Runners On</span> <span id="m-w-r" class="font-bold text-green-400"></span></div>
-                        <div class="flex justify-between text-sm"><span>Bases Empty</span> <span id="m-emp" class="font-bold"></span></div>
+    <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/95 backdrop-blur-xl p-4">
+        <div class="bg-slate-900 w-full max-w-4xl rounded-[40px] border border-slate-800 overflow-hidden relative shadow-2xl p-8 md:p-12">
+            <button onclick="closeModal()" class="absolute top-8 right-8 text-slate-500 hover:text-white text-2xl">✕</button>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <p id="m-eq" class="text-green-500 font-bold uppercase text-xs mb-2 tracking-widest"></p>
+                    <h2 id="m-nom" class="text-4xl font-black italic uppercase mb-8"></h2>
+                    
+                    <div class="space-y-4 bg-slate-800/40 p-6 rounded-3xl border border-slate-700">
+                        <div class="flex justify-between border-b border-slate-700 pb-2">
+                            <span class="text-slate-400 text-sm">vs Right Hand</span>
+                            <span id="m-vs-r" class="font-bold"></span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-700 pb-2">
+                            <span class="text-slate-400 text-sm">w/ Runners On</span>
+                            <span id="m-w-r" class="font-bold text-green-400"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400 text-sm">Bases Empty</span>
+                            <span id="m-emp" class="font-bold"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="p-12 flex flex-col justify-center items-center">
-                    <h4 class="text-[10px] text-slate-500 font-bold uppercase mb-8">Fly vs Ground Outs</h4>
-                    <div class="w-64 h-64"><canvas id="chartPie"></canvas></div>
+                
+                <div class="flex flex-col items-center">
+                    <h4 class="text-[10px] font-bold text-slate-500 uppercase mb-6">Fly vs Ground Outs</h4>
+                    <div class="w-full h-64">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-xs text-slate-500 italic">Ratio: <span id="m-ratio"></span></p>
                 </div>
             </div>
         </div>
@@ -64,28 +61,22 @@
 
     <script>
         let ligaData = {};
-        let pieChart;
+        let myChart;
 
-        async function init() {
+        async function load() {
             const r = await fetch('liga_data.json');
             ligaData = await r.json();
-            document.getElementById('update-time').innerText = `SYNC: ${ligaData.actualizado}`;
+            document.getElementById('update-info').innerText = `LAST SYNC: ${ligaData.actualizado}`;
             
-            // Render Clasificación
-            const bCla = document.getElementById('body-cla');
-            ligaData.clasificacion.forEach(e => {
-                bCla.innerHTML += `<tr class="border-t border-slate-800 hover:bg-slate-800/50"><td class="p-6">${e.pos}</td><td class="p-6 font-bold uppercase italic">${e.equipo}</td><td class="p-6 text-green-500 font-bold">${e.pg}-${e.pp}</td><td class="p-6 font-mono">${e.avg}</td></tr>`;
-            });
-
-            // Render Jugadores
-            const gJug = document.getElementById('grid-jug');
+            const grid = document.getElementById('main-grid');
             ligaData.jugadores.forEach(p => {
-                gJug.innerHTML += `
-                <div onclick='openModal(${JSON.stringify(p)})' class="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-green-500 cursor-pointer transition group">
-                    <p class="text-[9px] text-slate-500 font-bold uppercase mb-1">${p.equipo}</p>
-                    <h4 class="font-black italic uppercase text-white group-hover:text-green-500 transition truncate">${p.nombre}</h4>
-                    <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between font-mono text-sm">
-                        <span class="text-slate-500 uppercase text-[10px]">AVG</span> <span>${p.avg_w_runners}</span>
+                grid.innerHTML += `
+                <div onclick='openModal(${JSON.stringify(p)})' class="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-green-500 transition cursor-pointer group">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase mb-1">${p.equipo}</p>
+                    <h3 class="text-xl font-black italic uppercase group-hover:text-green-500 transition">${p.nombre}</h3>
+                    <div class="mt-4 flex justify-between items-center text-xs">
+                        <span class="text-slate-500 uppercase">Runners On</span>
+                        <span class="font-bold text-green-500 text-lg">${p.avg_runners}</span>
                     </div>
                 </div>`;
             });
@@ -95,33 +86,31 @@
             document.getElementById('m-nom').innerText = p.nombre;
             document.getElementById('m-eq').innerText = p.equipo;
             document.getElementById('m-vs-r').innerText = p.avg_vs_r;
-            document.getElementById('m-w-r').innerText = p.avg_w_runners;
+            document.getElementById('m-w-r').innerText = p.avg_runners;
             document.getElementById('m-emp').innerText = p.avg_empty;
+            document.getElementById('m-ratio').innerText = p.ratio;
+
             document.getElementById('modal').classList.replace('hidden', 'flex');
             
-            if(pieChart) pieChart.destroy();
-            const ctx = document.getElementById('chartPie').getContext('2d');
-            pieChart = new Chart(ctx, {
+            if(myChart) myChart.destroy();
+            const ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Fly Outs', 'Ground Outs'],
                     datasets: [{
-                        data: [p.fly_outs, p.ground_outs],
+                        data: [p.fly_out, p.gnd_out],
                         backgroundColor: ['#22c55e', '#3b82f6'],
                         borderWidth: 0
                     }]
                 },
-                options: { cutout: '80%', plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10 } } } } }
+                options: { cutout: '80%', plugins: { legend: { position: 'bottom', labels: { color: '#64748b' } } } }
             });
         }
 
         function closeModal() { document.getElementById('modal').classList.replace('flex', 'hidden'); }
-        function showSection(id) { 
-            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(`sec-${id}`).classList.remove('hidden');
-        }
 
-        init();
+        load();
     </script>
 </body>
 </html>
