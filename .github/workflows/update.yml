@@ -16,10 +16,11 @@ jobs:
         run: pip install requests beautifulsoup4
       - name: Run scraper
         run: python scraper.py
-      - name: Commit and push if changed
+      - name: Guardar cambios y subir a la web
         run: |
-          git config --global user.name "StatBot"
-          git config --global user.email "bot@fenabs.com"
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "actions@github.com"
+          git pull origin main --rebase  # <--- ESTA LÍNEA ES LA CLAVE
           git add liga_data.json
-          git commit -m "Auto-update stats" || exit 0
-          git push
+          git commit -m "Actualización automática de estadísticas" || exit 0
+          git push origin main
