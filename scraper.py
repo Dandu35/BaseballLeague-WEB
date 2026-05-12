@@ -2,58 +2,61 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import datetime
+import re
 
 def scrape_equipo(url, nombre_equipo):
     jugadores = []
     try:
-        res = requests.get(url)
-        # Forzamos codificación para evitar errores con tildes o eñes
+        res = requests.get(url, timeout=10)
         res.encoding = 'utf-8' 
         soup = BeautifulSoup(res.text, 'html.parser')
         
-        # En las páginas .htm de FENABS, los datos suelen estar en etiquetas <pre>
-        pre_tag = soup.find('pre')
-        if not pre_tag:
-            return []
-
-        # Convertimos el texto del <pre> en líneas para procesarlas
-        lineas = pre_tag.text.split('\n')
+        texto = soup.get_text()
+        lineas = texto.split('\n')
         
-        # Buscamos la sección de bateo (Sorted by Batting avg)
-        empezar_bateo = False
+        # Buscamos la sección de bateo de forma más flexible
+        buscando_bateo = False
         for linea in lineas:
-            if "Sorted by Batting avg" in linea:
-                empezar_bateo = True
+            # Detectamos el inicio de la tabla de bateo
+            if "Batting avg" in linea or "AVG" in linea and "GP-GS" in linea:
+                buscando_bateo = True
                 continue
             
-            if empezar_bateo and len(linea.strip()) > 30:
-                # Si llegamos a los totales, paramos
-                if "Totals" in linea or "Opponents" in linea:
-                    break
-                
-                # Extraemos datos por posición de caracteres (es texto preformateado)
-                # Basado en la estructura estándar de StatCrew/FENABS
-                nombre = linea[3:24].strip()
-                avg = linea[24:29].strip()
-                h = linea[43:47].strip()
-                rbi = linea[63:67].strip()
-                
-                if avg.startswith('.'): # Validamos que sea una línea de jugador
+            if buscando_bateo:
+                # Si llegamos al final de la tabla, paramos
+                if "Totals" in linea or "Opponents" in linea or len(linea.strip()) < 10:
+                    if len(jugadores) > 0: break 
+                    else: continue
+
+                # Usamos una expresión regular para limpiar la línea
+                # Buscamos: Numero Nombre (letras y espacios) .AVG
+                match = re.search(r'(\d+)\s+([A-Za-z\s\.]+)\s+(\.\d{3})', linea)
+                if match:
+                    num = match.group(1)
+                    nombre = match.group(2).strip()
+                    avg = match.group(3)
+                    
+                    # Intentamos coger Hits y RBIs buscando números después del AVG
+                    resto = linea[linea.find(avg) + len(avg):].split()
+                    h = resto[3] if len(resto) > 3 else "0"
+                    rbi = resto[7] if len(resto) > 7 else "0"
+
                     jugadores.append({
-                        "nombre": nombre,
+                        "nombre": f"{nombre}",
                         "equipo": nombre_equipo,
                         "stat": avg,
                         "tipo": "AVG",
                         "h": h,
                         "rbi": rbi,
-                        "puntos": [1, 2, 1, 0, 1] # Datos para el gráfico
+                        "puntos": [1, 2, 1, 1, 2]
                     })
     except Exception as e:
-        print(f"Error parseando {nombre_equipo}: {e}")
+        print(f"Error en {nombre_equipo}: {e}")
     
     return jugadores
 
 def scrape_fenabs():
+    # URLs actualizadas
     urls_equipos = {
         "AMAYA": "https://stats.fenabs.es/2026/b_division1/stats/ama.htm",
         "IRABIA": "https://stats.fenabs.es/2026/b_division1/stats/ira.htm",
@@ -70,35 +73,32 @@ def scrape_fenabs():
         "top_lanzadores": []
     }
 
-    # 1. CLASIFICACIÓN (Mantenemos la lógica de la página principal)
+    # 1. CLASIFICACIÓN (Simplificada para asegurar captura)
     try:
-        res_cla = requests.get("https://stats.fenabs.es/2026/b_division1/cla.php")
+        res_cla = requests.get("https://stats.fenabs.es/2026/b_division1/cla.php", timeout=10)
         soup_cla = BeautifulSoup(res_cla.text, 'html.parser')
-        tabla_cla = soup_cla.find('table')
-        if tabla_cla:
-            for f in tabla_cla.find_all('tr')[2:]:
-                cols = f.find_all('td')
-                if len(cols) >= 6:
-                    data["clasificacion"].append({
-                        "pos": cols[0].text.strip(),
-                        "equipo": cols[1].text.strip(),
-                        "pj": cols[2].text.strip(),
-                        "pg": cols[3].text.strip(),
-                        "pp": cols[4].text.strip(),
-                        "avg": cols[5].text.strip()
-                    })
+        filas = soup_cla.find_all('tr')
+        for f in filas:
+            cols = f.find_all('td')
+            if len(cols) >= 6 and cols[0].text.strip().isdigit():
+                data["clasificacion"].append({
+                    "pos": cols[0].text.strip(),
+                    "equipo": cols[1].text.strip(),
+                    "pj": cols[2].text.strip(),
+                    "pg": cols[3].text.strip(),
+                    "pp": cols[4].text.strip(),
+                    "avg": cols[5].text.strip()
+                })
     except: pass
 
-    # 2. JUGADORES EQUIPO POR EQUIPO
-    todos_los_jugadores = []
-    for equipo, url in urls_equipos.items():
-        print(f"Extrayendo datos de {equipo}...")
-        jugadores_equipo = scrape_equipo(url, equipo)
-        todos_los_jugadores.extend(jugadores_equipo)
-
-    # Ordenamos por AVG para mostrar los mejores primero
-    todos_los_jugadores.sort(key=lambda x: x['stat'], reverse=True)
-    data["top_bateadores"] = todos_los_jugadores
+    # 2. JUGADORES
+    todos = []
+    for eq, url in urls_equipos.items():
+        todos.extend(scrape_equipo(url, eq))
+    
+    # Ordenamos por AVG (de mayor a menor)
+    todos.sort(key=lambda x: x['stat'], reverse=True)
+    data["top_bateadores"] = todos
 
     with open('liga_data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
