@@ -1,0 +1,25 @@
+name: Update FENABS Stats
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+      - name: Run scraper
+        run: python scraper.py
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name "StatBot"
+          git config --global user.email "bot@fenabs.com"
+          git add liga_data.json
+          git commit -m "Auto-update stats" || exit 0
+          git push
