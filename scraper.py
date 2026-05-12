@@ -7,42 +7,37 @@ import re
 def scrape_equipo(url, nombre_equipo):
     jugadores = []
     try:
-        res = requests.get(url, timeout=10)
+        # Añadimos un User-Agent para que la web no nos bloquee
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        res = requests.get(url, headers=headers, timeout=15)
         res.encoding = 'utf-8' 
+        
+        # FENABS usa texto preformateado, el texto plano es más fiable que el HTML
         soup = BeautifulSoup(res.text, 'html.parser')
+        texto_completo = soup.get_text()
+        lineas = texto_completo.split('\n')
         
-        texto = soup.get_text()
-        lineas = texto.split('\n')
-        
-        # Buscamos la sección de bateo de forma más flexible
-        buscando_bateo = False
         for linea in lineas:
-            # Detectamos el inicio de la tabla de bateo
-            if "Batting avg" in linea or "AVG" in linea and "GP-GS" in linea:
-                buscando_bateo = True
-                continue
+            linea = linea.strip()
             
-            if buscando_bateo:
-                # Si llegamos al final de la tabla, paramos
-                if "Totals" in linea or "Opponents" in linea or len(linea.strip()) < 10:
-                    if len(jugadores) > 0: break 
-                    else: continue
-
-                # Usamos una expresión regular para limpiar la línea
-                # Buscamos: Numero Nombre (letras y espacios) .AVG
-                match = re.search(r'(\d+)\s+([A-Za-z\s\.]+)\s+(\.\d{3})', linea)
-                if match:
-                    num = match.group(1)
-                    nombre = match.group(2).strip()
-                    avg = match.group(3)
+            # Buscamos el patrón: un número, un nombre largo, y un .AVG (ej: .385)
+            # Esta expresión regular es mucho más flexible
+            match = re.search(r'(\d+)\s+([A-Za-z\s\.,]+)\s+(\.\d{3})', linea)
+            
+            if match:
+                numero = match.group(1)
+                nombre = match.group(2).strip()
+                avg = match.group(3)
+                
+                # Para evitar basura, el nombre debe tener al menos 5 caracteres
+                if len(nombre) > 5 and "Totals" not in nombre and "Opponents" not in nombre:
+                    # Intentamos sacar H y RBI buscando los números que siguen al AVG
+                    partes = linea.split(avg)[1].split()
+                    h = partes[3] if len(partes) > 3 else "0"
+                    rbi = partes[7] if len(partes) > 7 else "0"
                     
-                    # Intentamos coger Hits y RBIs buscando números después del AVG
-                    resto = linea[linea.find(avg) + len(avg):].split()
-                    h = resto[3] if len(resto) > 3 else "0"
-                    rbi = resto[7] if len(resto) > 7 else "0"
-
                     jugadores.append({
-                        "nombre": f"{nombre}",
+                        "nombre": nombre,
                         "equipo": nombre_equipo,
                         "stat": avg,
                         "tipo": "AVG",
@@ -50,13 +45,14 @@ def scrape_equipo(url, nombre_equipo):
                         "rbi": rbi,
                         "puntos": [1, 2, 1, 1, 2]
                     })
+        print(f"✅ {nombre_equipo}: Encontrados {len(jugadores)} jugadores.")
     except Exception as e:
-        print(f"Error en {nombre_equipo}: {e}")
+        print(f"❌ Error en {nombre_equipo}: {e}")
     
     return jugadores
 
 def scrape_fenabs():
-    # URLs actualizadas
+    # Diccionario completo de URLs del Grupo Norte
     urls_equipos = {
         "AMAYA": "https://stats.fenabs.es/2026/b_division1/stats/ama.htm",
         "IRABIA": "https://stats.fenabs.es/2026/b_division1/stats/ira.htm",
@@ -73,12 +69,11 @@ def scrape_fenabs():
         "top_lanzadores": []
     }
 
-    # 1. CLASIFICACIÓN (Simplificada para asegurar captura)
+    # Captura de Clasificación
     try:
         res_cla = requests.get("https://stats.fenabs.es/2026/b_division1/cla.php", timeout=10)
         soup_cla = BeautifulSoup(res_cla.text, 'html.parser')
-        filas = soup_cla.find_all('tr')
-        for f in filas:
+        for f in soup_cla.find_all('tr'):
             cols = f.find_all('td')
             if len(cols) >= 6 and cols[0].text.strip().isdigit():
                 data["clasificacion"].append({
@@ -91,12 +86,12 @@ def scrape_fenabs():
                 })
     except: pass
 
-    # 2. JUGADORES
+    # Captura de Jugadores Equipo por Equipo
     todos = []
     for eq, url in urls_equipos.items():
         todos.extend(scrape_equipo(url, eq))
     
-    # Ordenamos por AVG (de mayor a menor)
+    # Ordenar por AVG de mayor a menor
     todos.sort(key=lambda x: x['stat'], reverse=True)
     data["top_bateadores"] = todos
 
