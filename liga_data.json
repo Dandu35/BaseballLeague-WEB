@@ -1,10 +1,9 @@
 {
-    "actualizado": "12/05/2026 06:27",
+    "actualizado": "12/05/2026 06:33",
     "clasificacion": [
         {
             "pos": "1",
             "equipo": "CBS TOROS",
-            "pj": "7",
             "pg": "6",
             "pp": "1",
             "avg": "857"
@@ -12,7 +11,6 @@
         {
             "pos": "2",
             "equipo": "CAD IRABIA",
-            "pj": "5",
             "pg": "3",
             "pp": "2",
             "avg": "600"
@@ -20,7 +18,6 @@
         {
             "pos": "3",
             "equipo": "CD AMAYA",
-            "pj": "6",
             "pg": "3",
             "pp": "3",
             "avg": "500"
@@ -28,7 +25,6 @@
         {
             "pos": "4",
             "equipo": "CD ARGA",
-            "pj": "6",
             "pg": "3",
             "pp": "3",
             "avg": "500"
@@ -36,7 +32,6 @@
         {
             "pos": "5",
             "equipo": "CBS MIRALBUENO",
-            "pj": "5",
             "pg": "1",
             "pp": "4",
             "avg": "200"
@@ -44,12 +39,671 @@
         {
             "pos": "6",
             "equipo": "SAN INAZIO",
-            "pj": "5",
             "pg": "1",
             "pp": "4",
             "avg": "200"
         }
     ],
-    "top_bateadores": [],
-    "top_lanzadores": []
+    "jugadores": [
+        {
+            "nombre": "Totals..............",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".207",
+            "avg_w_runners": ".218",
+            "avg_empty": ".188",
+            "fly_outs": "4",
+            "ground_outs": "17",
+            "ratio_fly_gnd": ".235",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Opponents...........",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".290",
+            "avg_w_runners": ".294",
+            "avg_empty": ".284",
+            "fly_outs": "3",
+            "ground_outs": "13",
+            "ratio_fly_gnd": ".231",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "GARMENDIA Aimar..",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".308",
+            "avg_w_runners": ".286",
+            "avg_empty": ".200",
+            "fly_outs": "2",
+            "ground_outs": "8",
+            "ratio_fly_gnd": "16",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "LOPEZ Andres.....",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".083",
+            "avg_w_runners": ".333",
+            "avg_empty": ".222",
+            "fly_outs": "1",
+            "ground_outs": "4",
+            "ratio_fly_gnd": "17",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "OSCARIZ Borja....",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".500",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "4",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ANDUEZA David....",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".333",
+            "avg_w_runners": ".000",
+            "avg_empty": ".333",
+            "fly_outs": "1",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "5",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "CENTENO Diego....",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "0",
+            "ratio_fly_gnd": "4",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "TABAR Lander.....",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".000",
+            "avg_empty": ".500",
+            "fly_outs": "2",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "5",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "DEL MORAL Yoel...",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".167",
+            "avg_w_runners": ".000",
+            "avg_empty": ".333",
+            "fly_outs": "3",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "6",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ARNAL Unax.......",
+            "equipo": "AMAYA",
+            "avg_vs_r": ".111",
+            "avg_w_runners": ".000",
+            "avg_empty": ".333",
+            "fly_outs": "2",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "13",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Totals..............",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".276",
+            "avg_w_runners": ".271",
+            "avg_empty": ".286",
+            "fly_outs": "4",
+            "ground_outs": "16",
+            "ratio_fly_gnd": ".250",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Opponents...........",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".220",
+            "avg_w_runners": ".244",
+            "avg_empty": ".167",
+            "fly_outs": "2",
+            "ground_outs": "8",
+            "ratio_fly_gnd": ".250",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "BERRAONDO Alain..",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".667",
+            "avg_w_runners": ".500",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "3",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "SANCHEZ Izan.....",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".667",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "9",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "GARRUES Jon......",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".333",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "4",
+            "ratio_fly_gnd": "6",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "CALVO Mateo......",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".375",
+            "avg_w_runners": ".667",
+            "avg_empty": ".200",
+            "fly_outs": "0",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "11",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "GIRON Mikel......",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".500",
+            "avg_empty": ".333",
+            "fly_outs": "0",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "6",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ARCE Mikel.......",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".200",
+            "avg_w_runners": ".333",
+            "avg_empty": ".250",
+            "fly_outs": "1",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "7",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ABETE Nicolas....",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".333",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "1",
+            "ratio_fly_gnd": "4",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ALONSO Unai......",
+            "equipo": "IRABIA",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "7",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Totals..............",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".224",
+            "avg_w_runners": ".198",
+            "avg_empty": ".268",
+            "fly_outs": "2",
+            "ground_outs": "9",
+            "ratio_fly_gnd": ".222",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Opponents...........",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".275",
+            "avg_w_runners": ".295",
+            "avg_empty": ".241",
+            "fly_outs": "1",
+            "ground_outs": "8",
+            "ratio_fly_gnd": ".125",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "MANTILLA Asdrubal",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".250",
+            "fly_outs": "0",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "5",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "PINTOR An...........",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".500",
+            "avg_w_runners": ".500",
+            "avg_empty": ".500",
+            "fly_outs": "4",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "5",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "VARELA Edenilson.",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".286",
+            "avg_w_runners": ".000",
+            "avg_empty": ".250",
+            "fly_outs": "0",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "11",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ROCCA Franyer....",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".143",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "4",
+            "ratio_fly_gnd": "8",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "CORREDERA Guiller",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "1",
+            "ratio_fly_gnd": "7",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "BITRIAIN Ivan....",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "0",
+            "ratio_fly_gnd": "6",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "ROMERO Javier....",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "1",
+            "ratio_fly_gnd": "3",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "MENDOZA Jeferson.",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "0",
+            "ratio_fly_gnd": "1",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "VILLEGAS Miguel..",
+            "equipo": "MIRALBUENO",
+            "avg_vs_r": ".286",
+            "avg_w_runners": ".500",
+            "avg_empty": ".667",
+            "fly_outs": "1",
+            "ground_outs": "8",
+            "ratio_fly_gnd": "14",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Totals..............",
+            "equipo": "TOROS",
+            "avg_vs_r": ".375",
+            "avg_w_runners": ".404",
+            "avg_empty": ".313",
+            "fly_outs": "6",
+            "ground_outs": "13",
+            "ratio_fly_gnd": ".462",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Opponents...........",
+            "equipo": "TOROS",
+            "avg_vs_r": ".180",
+            "avg_w_runners": ".182",
+            "avg_empty": ".178",
+            "fly_outs": "0",
+            "ground_outs": "10",
+            "ratio_fly_gnd": ".000",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "MENA Adrian......",
+            "equipo": "TOROS",
+            "avg_vs_r": ".455",
+            "avg_w_runners": ".250",
+            "avg_empty": ".333",
+            "fly_outs": "3",
+            "ground_outs": "7",
+            "ratio_fly_gnd": "14",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "PIDAL Iruna......",
+            "equipo": "TOROS",
+            "avg_vs_r": ".500",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "4",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "LATIENDA Juan....",
+            "equipo": "TOROS",
+            "avg_vs_r": ".182",
+            "avg_w_runners": ".500",
+            "avg_empty": ".125",
+            "fly_outs": "3",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "13",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "PUENTES Jeremy...",
+            "equipo": "TOROS",
+            "avg_vs_r": ".333",
+            "avg_w_runners": ".667",
+            "avg_empty": ".250",
+            "fly_outs": "1",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "10",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "RONDON Rafael....",
+            "equipo": "TOROS",
+            "avg_vs_r": ".375",
+            "avg_w_runners": ".500",
+            "avg_empty": ".500",
+            "fly_outs": "4",
+            "ground_outs": "7",
+            "ratio_fly_gnd": "12",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "FERRIZ Unai......",
+            "equipo": "TOROS",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "2",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "5",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "JAIME Ysrael.....",
+            "equipo": "TOROS",
+            "avg_vs_r": ".600",
+            "avg_w_runners": ".250",
+            "avg_empty": ".571",
+            "fly_outs": "2",
+            "ground_outs": "7",
+            "ratio_fly_gnd": "13",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Totals..............",
+            "equipo": "ARGA",
+            "avg_vs_r": ".298",
+            "avg_w_runners": ".311",
+            "avg_empty": ".261",
+            "fly_outs": "6",
+            "ground_outs": "19",
+            "ratio_fly_gnd": ".316",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Opponents...........",
+            "equipo": "ARGA",
+            "avg_vs_r": ".281",
+            "avg_w_runners": ".294",
+            "avg_empty": ".255",
+            "fly_outs": "7",
+            "ground_outs": "18",
+            "ratio_fly_gnd": ".389",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "VARELA Adrian....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".538",
+            "avg_w_runners": ".250",
+            "avg_empty": ".625",
+            "fly_outs": "6",
+            "ground_outs": "10",
+            "ratio_fly_gnd": "16",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "JUAREZ Gorka.....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".000",
+            "avg_empty": ".250",
+            "fly_outs": "1",
+            "ground_outs": "4",
+            "ratio_fly_gnd": "8",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "SARASIBAR Iker...",
+            "equipo": "ARGA",
+            "avg_vs_r": ".167",
+            "avg_w_runners": ".000",
+            "avg_empty": ".250",
+            "fly_outs": "0",
+            "ground_outs": "5",
+            "ratio_fly_gnd": "8",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "CABALLERO Iban...",
+            "equipo": "ARGA",
+            "avg_vs_r": ".333",
+            "avg_w_runners": ".400",
+            "avg_empty": ".000",
+            "fly_outs": "1",
+            "ground_outs": "10",
+            "ratio_fly_gnd": "18",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "DE LA IGLESIA Yer",
+            "equipo": "ARGA",
+            "avg_vs_r": ".200",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "1",
+            "ground_outs": "8",
+            "ratio_fly_gnd": "17",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "MARTINEZ Jose....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".333",
+            "avg_w_runners": ".000",
+            "avg_empty": ".400",
+            "fly_outs": "2",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "12",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "SARASIBAR Jon....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".273",
+            "avg_w_runners": ".333",
+            "avg_empty": ".143",
+            "fly_outs": "1",
+            "ground_outs": "7",
+            "ratio_fly_gnd": "15",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "SAURA Javier.....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".333",
+            "avg_w_runners": ".000",
+            "avg_empty": ".500",
+            "fly_outs": "2",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "5",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "BAILON Kimetz....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "9",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "GARCIA Martin....",
+            "equipo": "ARGA",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".500",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "1",
+            "ratio_fly_gnd": "4",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Totals..............",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".157",
+            "avg_w_runners": ".186",
+            "avg_empty": ".125",
+            "fly_outs": "1",
+            "ground_outs": "5",
+            "ratio_fly_gnd": ".200",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "Opponents...........",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".342",
+            "avg_w_runners": ".355",
+            "avg_empty": ".314",
+            "fly_outs": "10",
+            "ground_outs": "22",
+            "ratio_fly_gnd": ".455",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "RUIZ Endika......",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".000",
+            "fly_outs": "0",
+            "ground_outs": "1",
+            "ratio_fly_gnd": "4",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "BARRERAS Guillerm",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".333",
+            "avg_empty": ".167",
+            "fly_outs": "1",
+            "ground_outs": "6",
+            "ratio_fly_gnd": "10",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "CRESPO Jesus.....",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".000",
+            "avg_empty": ".200",
+            "fly_outs": "2",
+            "ground_outs": "3",
+            "ratio_fly_gnd": "8",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "SUAREZ Jose......",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".250",
+            "avg_w_runners": ".000",
+            "avg_empty": ".167",
+            "fly_outs": "2",
+            "ground_outs": "4",
+            "ratio_fly_gnd": "11",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "CRESPO Manuel....",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".000",
+            "avg_w_runners": ".000",
+            "avg_empty": ".500",
+            "fly_outs": "1",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "6",
+            "tipo": "BATEADOR"
+        },
+        {
+            "nombre": "GARZIA Markel....",
+            "equipo": "SAN INAZIO",
+            "avg_vs_r": ".500",
+            "avg_w_runners": ".500",
+            "avg_empty": ".333",
+            "fly_outs": "1",
+            "ground_outs": "2",
+            "ratio_fly_gnd": "6",
+            "tipo": "BATEADOR"
+        }
+    ]
 }
