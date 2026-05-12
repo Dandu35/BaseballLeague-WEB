@@ -26,7 +26,8 @@ jobs:
         run: |
           git config --global user.name "StatBot"
           git config --global user.email "bot@fenabs.com"
-          git pull origin main --rebase
+          git fetch origin main
+          git reset --soft origin/main
           git add liga_data.json
           git commit -m "Auto-update stats" || exit 0
-          git push origin main
+          git push origin main --force
