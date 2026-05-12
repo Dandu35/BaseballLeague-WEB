@@ -7,20 +7,26 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      # Actualizado a v4 (usa Node 24)
+      - uses: actions/checkout@v4 
+      
+      # Actualizado a v5 (usa Node 24)
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11' # Versión más moderna y estable
+
       - name: Install dependencies
         run: pip install requests beautifulsoup4
-      - name: Run scraper
+
+      - name: Ejecutar el robot extractor
         run: python scraper.py
-      - name: Guardar cambios y subir a la web
+
+      - name: Commit and push if changed
         run: |
-          git config --global user.name "GitHub Action Bot"
-          git config --global user.email "actions@github.com"
-          git pull origin main --rebase  # <--- ESTA LÍNEA ES LA CLAVE
+          git config --global user.name "StatBot"
+          git config --global user.email "bot@fenabs.com"
+          git pull origin main --rebase
           git add liga_data.json
-          git commit -m "Actualización automática de estadísticas" || exit 0
+          git commit -m "Auto-update stats" || exit 0
           git push origin main
