@@ -4,35 +4,50 @@ import json
 import datetime
 import re
 
-def scrape_equipo(url, equipo_nombre):
+def scrape_equipo_situacional(url, equipo_nombre):
     jugadores = []
     try:
         res = requests.get(url, timeout=15)
         res.encoding = 'utf-8'
         texto = res.text
         
-        # --- EXTRACCIÓN DE BATEO SITUACIONAL ---
-        # Buscamos la tabla "BATTING ANALYSIS"
-        analysis_part = texto.split("BATTING ANALYSIS")[1].split("------------------------------------------------------------------------------------------------------------------------------------")[1]
-        lineas = analysis_part.split('\n')
+        # Localizamos la sección de análisis
+        if "BATTING ANALYSIS" not in texto:
+            return []
+            
+        seccion = texto.split("BATTING ANALYSIS")[1]
+        lineas = seccion.split('\n')
         
         for l in lineas:
-            # Regex para capturar: Nombre, vs Right, w/Runners, Bases Empty y Fly/Gnd
-            m = re.search(r'([A-Za-z\s\.,]+)\s+[\d-]+\s+[\d-]+\s+[\w.-]+\s+\d+\s+\d+\s+(\.\d{3})\s+\d+\s+\d+\s+(\.\d{3})\s+\d+\s+\d+\s+(\.\d{3}).*?(\d+)\s+(\d+)\s+([\d.]+)', l)
-            if m:
+            # Esta REGEX busca: 
+            # 1. Número y Nombre
+            # 2. vs Left (H, AB, Avg)
+            # 3. vs Right (H, AB, Avg) -> CAPTURAMOS ESTE
+            # 4. w/Runners (H, AB, Avg) -> CAPTURAMOS ESTE
+            # 5. Bases Empty (H, AB, Avg) -> CAPTURAMOS ESTE
+            # 6. Fly Out, Gnd Out -> CAPTURAMOS ESTOS
+            
+            # Expresión regular ajustada a las columnas de FENABS
+            pattern = r'^\s*\d*\s*([A-Za-z\s\.,]+)\.+\s+[\d-]+\s+[\d-]+\s+[\w.-]+\s+[\d-]+\s+[\d-]+\s+([\w.-]+)\s+[\d-]+\s+[\d-]+\s+([\w.-]+)\s+[\d-]+\s+[\d-]+\s+([\w.-]+)\s+[\d-]+\s+[\d-]+\s+[\w.-]+\s+\d+\s+\d+\s+[\w.-]+\s+(\d+)\s+(\d+)\s+([\d.]+)'
+            
+            match = re.search(pattern, l)
+            
+            if match:
+                nombre = match.group(1).strip()
+                if "Totals" in nombre or "Opponents" in nombre: continue
+                
                 jugadores.append({
-                    "nombre": m.group(1).strip(),
+                    "nombre": nombre,
                     "equipo": equipo_nombre,
-                    "avg_vs_r": m.group(2),
-                    "avg_w_runners": m.group(3),
-                    "avg_empty": m.group(4),
-                    "fly_outs": m.group(5),
-                    "ground_outs": m.group(6),
-                    "ratio_fly_gnd": m.group(7),
-                    "tipo": "BATEADOR"
+                    "avg_vs_r": match.group(2),
+                    "avg_runners": match.group(3),
+                    "avg_empty": match.group(4),
+                    "fly_out": match.group(5),
+                    "gnd_out": match.group(6),
+                    "ratio": match.group(7),
+                    "puntos_grafico": [match.group(2), match.group(3), match.group(4)]
                 })
-        
-        print(f"✅ {equipo_nombre}: {len(jugadores)} analizados.")
+        print(f"✅ {equipo_nombre}: capturados {len(jugadores)} jugadores de la tabla de análisis.")
     except Exception as e:
         print(f"❌ Error en {equipo_nombre}: {e}")
     return jugadores
@@ -53,7 +68,7 @@ def scrape_fenabs():
         "jugadores": []
     }
 
-    # Clasificación
+    # Scrape Clasificación
     try:
         r = requests.get("https://stats.fenabs.es/2026/b_division1/cla.php")
         s = BeautifulSoup(r.text, 'html.parser')
@@ -61,13 +76,16 @@ def scrape_fenabs():
             cols = f.find_all('td')
             if len(cols) >= 6 and cols[0].text.strip().isdigit():
                 data["clasificacion"].append({
-                    "pos": cols[0].text.strip(), "equipo": cols[1].text.strip(),
-                    "pg": cols[3].text.strip(), "pp": cols[4].text.strip(), "avg": cols[5].text.strip()
+                    "pos": cols[0].text.strip(),
+                    "equipo": cols[1].text.strip(),
+                    "pg": cols[3].text.strip(),
+                    "pp": cols[4].text.strip(),
+                    "avg": cols[5].text.strip()
                 })
     except: pass
 
     for eq, url in urls.items():
-        data["jugadores"].extend(scrape_equipo(url, eq))
+        data["jugadores"].extend(scrape_equipo_situacional(url, eq))
 
     with open('liga_data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
