@@ -1,6 +1,521 @@
 {
-    "actualizado": "12/05/2026 05:14",
-    "clasificacion": [],
-    "top_bateadores": [],
+    "actualizado": "12/05/2026 05:36",
+    "clasificacion": [
+        {
+            "pos": "1",
+            "equipo": "CBS TOROS",
+            "pj": "7",
+            "pg": "6",
+            "pp": "1",
+            "avg": "857"
+        },
+        {
+            "pos": "2",
+            "equipo": "CAD IRABIA",
+            "pj": "5",
+            "pg": "3",
+            "pp": "2",
+            "avg": "600"
+        },
+        {
+            "pos": "3",
+            "equipo": "CD AMAYA",
+            "pj": "6",
+            "pg": "3",
+            "pp": "3",
+            "avg": "500"
+        },
+        {
+            "pos": "4",
+            "equipo": "CD ARGA",
+            "pj": "6",
+            "pg": "3",
+            "pp": "3",
+            "avg": "500"
+        },
+        {
+            "pos": "5",
+            "equipo": "CBS MIRALBUENO",
+            "pj": "5",
+            "pg": "1",
+            "pp": "4",
+            "avg": "200"
+        },
+        {
+            "pos": "6",
+            "equipo": "SAN INAZIO",
+            "pj": "5",
+            "pg": "1",
+            "pp": "4",
+            "avg": "200"
+        }
+    ],
+    "top_bateadores": [
+        {
+            "nombre": "REYES Victor.....",
+            "equipo": "TOROS",
+            "stat": ".800",
+            "tipo": "AVG",
+            "h": "16",
+            "rbi": "13",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "VARELA Adrian....",
+            "equipo": "ARGA",
+            "stat": ".611",
+            "tipo": "AVG",
+            "h": "11",
+            "rbi": "15",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "JAIME Ysrael.....",
+            "equipo": "TOROS",
+            "stat": ".471",
+            "tipo": "AVG",
+            "h": "8",
+            "rbi": "3",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "MARTINEZ Jose....",
+            "equipo": "ARGA",
+            "stat": ".429",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "RONDON Rafael....",
+            "equipo": "TOROS",
+            "stat": ".400",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "6",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "MOHAMED Tasser...",
+            "equipo": "AMAYA",
+            "stat": ".385",
+            "tipo": "AVG",
+            "h": "5",
+            "rbi": "6",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "GONCALVES Diego..",
+            "equipo": "TOROS",
+            "stat": ".375",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "6",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "CALVO Mateo......",
+            "equipo": "IRABIA",
+            "stat": ".364",
+            "tipo": "AVG",
+            "h": "4",
+            "rbi": "3",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "VARELA Edenilson.",
+            "equipo": "MIRALBUENO",
+            "stat": ".353",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "0",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "LOPEZ Andres.....",
+            "equipo": "AMAYA",
+            "stat": ".300",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "ARNAL Unax.......",
+            "equipo": "AMAYA",
+            "stat": ".286",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "3",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "CABALLERO Iban...",
+            "equipo": "ARGA",
+            "stat": ".286",
+            "tipo": "AVG",
+            "h": "6",
+            "rbi": "4",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "ESTEVEZ Arly.....",
+            "equipo": "TOROS",
+            "stat": ".278",
+            "tipo": "AVG",
+            "h": "5",
+            "rbi": "7",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "VILLEGAS Miguel..",
+            "equipo": "MIRALBUENO",
+            "stat": ".267",
+            "tipo": "AVG",
+            "h": "4",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "JUAREZ Gorka.....",
+            "equipo": "ARGA",
+            "stat": ".267",
+            "tipo": "AVG",
+            "h": "4",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "GARMENDIA Aimar..",
+            "equipo": "AMAYA",
+            "stat": ".263",
+            "tipo": "AVG",
+            "h": "5",
+            "rbi": "7",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "ARCE Mikel.......",
+            "equipo": "IRABIA",
+            "stat": ".250",
+            "tipo": "AVG",
+            "h": "3",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "SANCHEZ Izan.....",
+            "equipo": "IRABIA",
+            "stat": ".250",
+            "tipo": "AVG",
+            "h": "2",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "MANTILLA Asdrubal",
+            "equipo": "MIRALBUENO",
+            "stat": ".214",
+            "tipo": "AVG",
+            "h": "3",
+            "rbi": "0",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "SARASIBAR Jon....",
+            "equipo": "ARGA",
+            "stat": ".200",
+            "tipo": "AVG",
+            "h": "3",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "LATIENDA Juan....",
+            "equipo": "TOROS",
+            "stat": ".188",
+            "tipo": "AVG",
+            "h": "3",
+            "rbi": "4",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "BARRERAS Guillerm",
+            "equipo": "SAN INAZIO",
+            "stat": ".188",
+            "tipo": "AVG",
+            "h": "3",
+            "rbi": "3",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "CRESPO Manuel....",
+            "equipo": "SAN INAZIO",
+            "stat": ".167",
+            "tipo": "AVG",
+            "h": "2",
+            "rbi": "1",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "SARASIBAR Iker...",
+            "equipo": "ARGA",
+            "stat": ".154",
+            "tipo": "AVG",
+            "h": "2",
+            "rbi": "0",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "SUAREZ Jose......",
+            "equipo": "SAN INAZIO",
+            "stat": ".143",
+            "tipo": "AVG",
+            "h": "2",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "DE LA IGLESIA Yer",
+            "equipo": "ARGA",
+            "stat": ".133",
+            "tipo": "AVG",
+            "h": "2",
+            "rbi": "4",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "ARNAL Aday.......",
+            "equipo": "AMAYA",
+            "stat": ".077",
+            "tipo": "AVG",
+            "h": "1",
+            "rbi": "1",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "GARRUES Jon......",
+            "equipo": "IRABIA",
+            "stat": ".000",
+            "tipo": "AVG",
+            "h": "0",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "CORREDERA Guiller",
+            "equipo": "MIRALBUENO",
+            "stat": ".000",
+            "tipo": "AVG",
+            "h": "0",
+            "rbi": "0",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "RAMIREZ Isaac....",
+            "equipo": "SAN INAZIO",
+            "stat": ".000",
+            "tipo": "AVG",
+            "h": "0",
+            "rbi": "2",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        },
+        {
+            "nombre": "PEREZ Jordi......",
+            "equipo": "SAN INAZIO",
+            "stat": ".000",
+            "tipo": "AVG",
+            "h": "0",
+            "rbi": "1",
+            "puntos": [
+                1,
+                2,
+                1,
+                1,
+                2
+            ]
+        }
+    ],
     "top_lanzadores": []
 }
