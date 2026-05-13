@@ -1,5 +1,5 @@
 {
-    "actualizado": "13/05/2026 08:26",
+    "actualizado": "13/05/2026 08:40",
     "clasificacion": [
         {
             "pos": "1",
@@ -103,7 +103,7 @@
         {
             "nombre": "DEL ARBOL Daniel",
             "equipo": "AMAYA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".000",
             "avg_runners": ".000",
             "avg_empty": "---",
@@ -136,7 +136,7 @@
         {
             "nombre": "CENTENO Diego...",
             "equipo": "AMAYA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".000",
             "avg_runners": ".000",
             "avg_empty": ".000",
@@ -169,7 +169,7 @@
         {
             "nombre": "TABAR Lander....",
             "equipo": "AMAYA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".286",
             "avg_runners": ".200",
             "avg_empty": ".500",
@@ -246,13 +246,46 @@
         {
             "nombre": "MENA Alejandro..",
             "equipo": "AMAYA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".276",
             "avg_runners": ".250",
             "avg_empty": ".324",
-            "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "fly_out": "6",
+            "gnd_out": "29",
+            "ratio": ".207"
+        },
+        {
+            "nombre": "DEL ARBOL Daniel",
+            "equipo": "AMAYA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".300",
+            "avg_runners": ".344",
+            "avg_empty": ".222",
+            "fly_out": "7",
+            "gnd_out": "19",
+            "ratio": ".368"
+        },
+        {
+            "nombre": "CENTENO Diego...",
+            "equipo": "AMAYA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".333",
+            "avg_runners": ".350",
+            "avg_empty": ".308",
+            "fly_out": "5",
+            "gnd_out": "13",
+            "ratio": ".385"
+        },
+        {
+            "nombre": "TABAR Lander....",
+            "equipo": "AMAYA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".200",
+            "avg_runners": ".333",
+            "avg_empty": ".000",
+            "fly_out": "1",
+            "gnd_out": "3",
+            "ratio": ".333"
         },
         {
             "nombre": "BERRAONDO Alain.",
@@ -268,7 +301,7 @@
         {
             "nombre": "CARDENAS Ian....",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".333",
             "avg_runners": ".250",
             "avg_empty": ".400",
@@ -290,7 +323,7 @@
         {
             "nombre": "SANCHEZ Izan....",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".250",
             "avg_runners": ".200",
             "avg_empty": ".333",
@@ -323,7 +356,7 @@
         {
             "nombre": "CABALLERO Kaiet.",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".500",
             "avg_runners": ".000",
             "avg_empty": "1.000",
@@ -345,7 +378,7 @@
         {
             "nombre": "CALVO Mateo.....",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".364",
             "avg_runners": ".375",
             "avg_empty": ".333",
@@ -378,7 +411,7 @@
         {
             "nombre": "SAN MIGUEL Diego",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".333",
             "avg_runners": ".250",
             "avg_empty": ".500",
@@ -389,7 +422,7 @@
         {
             "nombre": "ARCE Mikel......",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".250",
             "avg_runners": ".200",
             "avg_empty": ".286",
@@ -409,15 +442,81 @@
             "ratio": "1.000"
         },
         {
+            "nombre": "CARDENAS Ian....",
+            "equipo": "IRABIA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".200",
+            "avg_runners": ".111",
+            "avg_empty": "1.000",
+            "fly_out": "1",
+            "gnd_out": "4",
+            "ratio": ".250"
+        },
+        {
+            "nombre": "SANCHEZ Izan....",
+            "equipo": "IRABIA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".308",
+            "avg_runners": ".286",
+            "avg_empty": ".400",
+            "fly_out": "3",
+            "gnd_out": "8",
+            "ratio": ".375"
+        },
+        {
+            "nombre": "CABALLERO Kaiet.",
+            "equipo": "IRABIA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".130",
+            "avg_runners": ".111",
+            "avg_empty": ".143",
+            "fly_out": "1",
+            "gnd_out": "9",
+            "ratio": ".111"
+        },
+        {
             "nombre": "CALVO Lucas.....",
             "equipo": "IRABIA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".111",
             "avg_runners": ".111",
             "avg_empty": "---",
+            "fly_out": "1",
+            "gnd_out": "4",
+            "ratio": ".250"
+        },
+        {
+            "nombre": "CALVO Mateo.....",
+            "equipo": "IRABIA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".333",
+            "avg_runners": ".400",
+            "avg_empty": ".000",
+            "fly_out": "2",
+            "gnd_out": "4",
+            "ratio": ".500"
+        },
+        {
+            "nombre": "SAN MIGUEL Diego",
+            "equipo": "IRABIA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".091",
+            "avg_runners": ".125",
+            "avg_empty": ".000",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "3",
+            "ratio": ".000"
+        },
+        {
+            "nombre": "ARCE Mikel......",
+            "equipo": "IRABIA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".280",
+            "avg_runners": ".375",
+            "avg_empty": ".111",
+            "fly_out": "3",
+            "gnd_out": "10",
+            "ratio": ".300"
         },
         {
             "nombre": "GRACIA Diego....",
@@ -510,57 +609,57 @@
         {
             "nombre": "OTAL Alexander..",
             "equipo": "MIRALBUENO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".040",
             "avg_runners": ".000",
             "avg_empty": ".067",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "8",
+            "ratio": ".000"
         },
         {
             "nombre": "ROCCA Franyer...",
             "equipo": "MIRALBUENO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".455",
             "avg_runners": ".444",
             "avg_empty": ".500",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "2",
+            "ratio": ".000"
         },
         {
             "nombre": "ALVAREZ Hugo....",
             "equipo": "MIRALBUENO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".367",
             "avg_runners": ".357",
             "avg_empty": ".500",
-            "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "fly_out": "2",
+            "gnd_out": "10",
+            "ratio": ".200"
         },
         {
             "nombre": "REYES  Kennier..",
             "equipo": "MIRALBUENO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".324",
             "avg_runners": ".333",
             "avg_empty": ".310",
-            "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "fly_out": "13",
+            "gnd_out": "30",
+            "ratio": ".433"
         },
         {
             "nombre": "RODRIGUEZ Unai..",
             "equipo": "MIRALBUENO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".133",
             "avg_runners": ".111",
             "avg_empty": ".167",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "6",
+            "ratio": ".000"
         },
         {
             "nombre": "ESTEVEZ Arly....",
@@ -587,7 +686,7 @@
         {
             "nombre": "GONCALVES Diego.",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".375",
             "avg_runners": ".429",
             "avg_empty": ".333",
@@ -664,7 +763,7 @@
         {
             "nombre": "PUENTES Jeremy..",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".400",
             "avg_runners": ".333",
             "avg_empty": "1.000",
@@ -686,7 +785,7 @@
         {
             "nombre": "QUIROGA Luis....",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".333",
             "avg_runners": ".000",
             "avg_empty": ".500",
@@ -741,51 +840,84 @@
         {
             "nombre": "APOSTOL Deninson",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".099",
             "avg_runners": ".088",
             "avg_empty": ".108",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "20",
+            "ratio": ".000"
+        },
+        {
+            "nombre": "GONCALVES Diego.",
+            "equipo": "TOROS",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".200",
+            "avg_runners": ".333",
+            "avg_empty": ".000",
+            "fly_out": "0",
+            "gnd_out": "1",
+            "ratio": ".000"
         },
         {
             "nombre": "GOMEZ Elvis.....",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".077",
             "avg_runners": ".111",
             "avg_empty": ".000",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "5",
+            "ratio": ".000"
+        },
+        {
+            "nombre": "PUENTES Jeremy..",
+            "equipo": "TOROS",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".325",
+            "avg_runners": ".333",
+            "avg_empty": ".313",
+            "fly_out": "1",
+            "gnd_out": "10",
+            "ratio": ".100"
         },
         {
             "nombre": "SANCHEZ Joel....",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".364",
             "avg_runners": ".750",
             "avg_empty": ".143",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "3",
+            "ratio": ".000"
         },
         {
             "nombre": "ZAMBRANO Jonatan",
             "equipo": "TOROS",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".167",
             "avg_runners": ".000",
             "avg_empty": ".333",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "2",
+            "ratio": ".000"
+        },
+        {
+            "nombre": "QUIROGA Luis....",
+            "equipo": "TOROS",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".091",
+            "avg_runners": ".000",
+            "avg_empty": ".333",
+            "fly_out": "0",
+            "gnd_out": "4",
+            "ratio": ".000"
         },
         {
             "nombre": "VARELA Adrian...",
             "equipo": "ARGA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".611",
             "avg_runners": ".563",
             "avg_empty": "1.000",
@@ -840,7 +972,7 @@
         {
             "nombre": "MUNOZ Ibai......",
             "equipo": "ARGA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".429",
             "avg_runners": ".500",
             "avg_empty": ".333",
@@ -895,7 +1027,7 @@
         {
             "nombre": "SAURA Javier....",
             "equipo": "ARGA",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".286",
             "avg_runners": ".400",
             "avg_empty": ".000",
@@ -926,6 +1058,39 @@
             "ratio": ".500"
         },
         {
+            "nombre": "VARELA Adrian...",
+            "equipo": "ARGA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".235",
+            "avg_runners": ".333",
+            "avg_empty": ".125",
+            "fly_out": "3",
+            "gnd_out": "7",
+            "ratio": ".429"
+        },
+        {
+            "nombre": "MUNOZ Ibai......",
+            "equipo": "ARGA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".407",
+            "avg_runners": ".455",
+            "avg_empty": ".200",
+            "fly_out": "5",
+            "gnd_out": "11",
+            "ratio": ".455"
+        },
+        {
+            "nombre": "SAURA Javier....",
+            "equipo": "ARGA",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".254",
+            "avg_runners": ".237",
+            "avg_empty": ".289",
+            "fly_out": "6",
+            "gnd_out": "35",
+            "ratio": ".171"
+        },
+        {
             "nombre": "MARTINEZ Arian..",
             "equipo": "SAN INAZIO",
             "posicion": "INFIELD",
@@ -950,7 +1115,7 @@
         {
             "nombre": "RUIZ Endika.....",
             "equipo": "SAN INAZIO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".000",
             "avg_runners": ".000",
             "avg_empty": ".000",
@@ -994,7 +1159,7 @@
         {
             "nombre": "PEREZ Jordi.....",
             "equipo": "SAN INAZIO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".000",
             "avg_runners": ".000",
             "avg_empty": ".000",
@@ -1005,7 +1170,7 @@
         {
             "nombre": "CRESPO Manuel...",
             "equipo": "SAN INAZIO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".167",
             "avg_runners": ".000",
             "avg_empty": ".250",
@@ -1027,7 +1192,7 @@
         {
             "nombre": "ALTAMIRA Roger..",
             "equipo": "SAN INAZIO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".000",
             "avg_runners": ".000",
             "avg_empty": ".000",
@@ -1058,15 +1223,59 @@
             "ratio": ".000"
         },
         {
+            "nombre": "RUIZ Endika.....",
+            "equipo": "SAN INAZIO",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".406",
+            "avg_runners": ".404",
+            "avg_empty": ".409",
+            "fly_out": "9",
+            "gnd_out": "24",
+            "ratio": ".375"
+        },
+        {
             "nombre": "VARGAS Isaac....",
             "equipo": "SAN INAZIO",
-            "posicion": "PITCHER",
+            "posicion": "INFIELD",
             "avg_vs_r": ".200",
             "avg_runners": ".308",
             "avg_empty": ".136",
+            "fly_out": "4",
+            "gnd_out": "13",
+            "ratio": ".308"
+        },
+        {
+            "nombre": "PEREZ Jordi.....",
+            "equipo": "SAN INAZIO",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".333",
+            "avg_runners": ".333",
+            "avg_empty": "---",
+            "fly_out": "1",
+            "gnd_out": "2",
+            "ratio": ".500"
+        },
+        {
+            "nombre": "CRESPO Manuel...",
+            "equipo": "SAN INAZIO",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".300",
+            "avg_runners": ".286",
+            "avg_empty": ".333",
+            "fly_out": "1",
+            "gnd_out": "5",
+            "ratio": ".200"
+        },
+        {
+            "nombre": "ALTAMIRA Roger..",
+            "equipo": "SAN INAZIO",
+            "posicion": "INFIELD",
+            "avg_vs_r": ".533",
+            "avg_runners": ".462",
+            "avg_empty": "1.000",
             "fly_out": "0",
-            "gnd_out": "0",
-            "ratio": "0.0"
+            "gnd_out": "2",
+            "ratio": ".000"
         }
     ]
 }
