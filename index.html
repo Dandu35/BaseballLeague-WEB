@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>FN HUB | Player Selection 2026</title>
+    <title>FN HUB | League Management System</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;700&display=swap');
         
@@ -15,179 +15,186 @@
             overflow: hidden;
             color: white;
         }
-
         .font-game { font-family: 'Orbitron', sans-serif; }
 
-        .scanline {
-            width: 100%; height: 100px;
-            background: linear-gradient(0deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
-            position: absolute; top: -100px; left: 0;
-            animation: scan 4s linear infinite;
-            pointer-events: none;
+        /* Estilos de Navegación */
+        .nav-btn { position: relative; overflow: hidden; }
+        .nav-btn.active::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #22c55e;
         }
-        @keyframes scan { 0% { top: -100px; } 100% { top: 100%; } }
 
+        /* Estilos Visor Jugadores */
         .player-btn {
             clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 0px solid #22c55e;
+            transition: all 0.3s ease;
         }
-        .player-btn:hover, .player-btn.active {
-            background: rgba(34, 197, 94, 0.9);
-            color: black;
-            transform: translateX(15px);
-            border-left: 8px solid white;
+        .player-btn.active {
+            background: #22c55e; color: black; transform: translateX(10px);
         }
-
-        #main-photo {
-            transition: opacity 0.4s ease, transform 0.5s ease;
-        }
-
-        /* Scrollbar estilo retro */
+        
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #22c55e; }
+
+        .page-transition { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="flex flex-col">
 
-    <div class="scanline"></div>
+    <nav class="flex gap-2 p-4 bg-black/60 border-b border-white/10 z-[100] backdrop-blur-md">
+        <button onclick="changePage('home')" class="nav-btn px-6 py-2 font-game text-[10px] tracking-widest hover:text-green-500 transition active" id="btn-home">HOME</button>
+        <button onclick="changePage('roster')" class="nav-btn px-6 py-2 font-game text-[10px] tracking-widest hover:text-green-500 transition" id="btn-roster">PLAYERS</button>
+        <button onclick="changePage('ranking')" class="nav-btn px-6 py-2 font-game text-[10px] tracking-widest hover:text-green-500 transition" id="btn-ranking">RANKING</button>
+        <button onclick="changePage('schedule')" class="nav-btn px-6 py-2 font-game text-[10px] tracking-widest hover:text-green-500 transition" id="btn-schedule">SCHEDULE</button>
+    </nav>
 
-    <header class="p-6 flex justify-between items-center border-b border-white/10 glass z-50">
-        <div class="flex items-center gap-4">
-            <div class="bg-green-500 text-black font-black px-2 py-1 font-game italic">LVL 26</div>
-            <h1 class="font-game text-2xl font-black italic tracking-widest">PLAYER<span class="text-green-500">_STAT</span></h1>
+    <div class="flex-1 overflow-hidden relative">
+
+        <div id="page-home" class="page p-12 overflow-y-auto h-full page-transition">
+            <div class="max-w-4xl">
+                <h2 class="font-game text-6xl font-black italic mb-4">LATEST_SYNC</h2>
+                <p id="update-info" class="text-green-500 font-mono text-sm mb-12"></p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/5 p-8 border-l-4 border-green-500">
+                        <h3 class="font-game text-lg mb-2 text-white">DATABASE STATUS</h3>
+                        <p class="text-slate-400 text-sm">Conectado con éxito a stats.fenabs.es. Datos de bateo situacional extraídos.</p>
+                    </div>
+                    <div class="bg-white/5 p-8 border-l-4 border-blue-500">
+                        <h3 class="font-game text-lg mb-2 text-white">UPCOMING EVENT</h3>
+                        <p class="text-slate-400 text-sm">Fin de semana de liga nacional. Actualización automática activada.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="update-info" class="text-[9px] font-mono opacity-40 uppercase"></div>
-    </header>
 
-    <main class="flex-1 flex overflow-hidden">
-        
-        <aside class="w-1/3 p-6 overflow-y-auto custom-scrollbar bg-black/20">
-            <div class="mb-6 border-b border-white/10 pb-2">
-                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest italic">Roster_Database</p>
-            </div>
-            <div id="player-list" class="space-y-2"></div>
-        </aside>
-
-        <section class="flex-1 relative overflow-hidden flex items-center justify-center">
-            
-            <div class="absolute w-[500px] h-[500px] bg-green-500/10 blur-[120px] rounded-full"></div>
-
-            <div class="relative z-10 flex w-full h-full items-center px-12">
-                
-                <div class="w-1/2 h-full flex items-center justify-center relative">
-                    <img id="main-photo" src="" class="h-[85%] object-contain z-10">
-                </div>
-
-                <div class="w-1/2 space-y-8">
-                    <div>
-                        <div id="v-team" class="inline-block px-3 py-1 bg-white/10 text-xs font-bold mb-4 skew-x-[-15deg]"></div>
-                        <h2 id="v-name" class="font-game text-5xl font-black italic uppercase leading-none block">---</h2>
+        <div id="page-roster" class="page hidden h-full flex overflow-hidden page-transition">
+            <aside class="w-1/3 p-6 overflow-y-auto custom-scrollbar bg-black/20 border-r border-white/5">
+                <div id="player-list" class="space-y-2"></div>
+            </aside>
+            <section class="flex-1 relative flex items-center justify-center px-12">
+                <div class="absolute w-[400px] h-[400px] bg-green-500/5 blur-[100px] rounded-full"></div>
+                <div class="relative z-10 flex w-full items-center">
+                    <div class="w-1/2 flex justify-center">
+                        <img id="main-photo" src="" class="h-[75vh] object-contain transition-all duration-500">
                     </div>
-
-                    <div class="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
-                        <div class="bg-slate-900/80 p-6">
-                            <p class="text-[10px] text-green-500 font-bold uppercase mb-2">VS_RIGHT_AVG</p>
-                            <p id="v-vs-r" class="font-game text-4xl">---</p>
+                    <div class="w-1/2 space-y-6">
+                        <div>
+                            <span id="v-team" class="bg-white/10 px-3 py-1 text-[10px] font-bold text-green-500 mb-4 inline-block"></span>
+                            <h2 id="v-name" class="font-game text-5xl font-black italic uppercase leading-none">---</h2>
                         </div>
-                        <div class="bg-slate-900/80 p-6">
-                            <p class="text-[10px] text-blue-400 font-bold uppercase mb-2">RUNNERS_ON</p>
-                            <p id="v-w-r" class="font-game text-4xl">---</p>
-                        </div>
-                        <div class="bg-slate-900/80 p-6 col-span-2 flex justify-between items-center">
-                            <div>
-                                <p class="text-[10px] text-slate-500 font-bold uppercase mb-1">FLY/GND_RATIO</p>
-                                <p id="v-ratio" class="font-game text-2xl text-white">0.0</p>
+                        <div class="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
+                            <div class="bg-slate-900/90 p-6 text-center">
+                                <p class="text-[9px] text-slate-500 font-bold mb-1">VS RIGHT AVG</p>
+                                <p id="v-vs-r" class="font-game text-3xl">.000</p>
                             </div>
-                            <div class="text-right">
-                                <p class="text-[10px] text-slate-500 font-bold uppercase mb-1">EMPTY_AVG</p>
-                                <p id="v-empty" class="font-game text-xl opacity-50">.000</p>
+                            <div class="bg-slate-900/90 p-6 text-center">
+                                <p class="text-[9px] text-slate-500 font-bold mb-1">RUNNERS ON</p>
+                                <p id="v-w-r" class="font-game text-3xl text-green-500">.000</p>
+                            </div>
+                            <div class="bg-slate-900/90 p-6 text-center col-span-2 flex justify-around">
+                                <div><p class="text-[9px] text-slate-500">FLY/GND</p><p id="v-ratio" class="font-game text-xl">0.0</p></div>
+                                <div><p class="text-[9px] text-slate-500">EMPTY</p><p id="v-empty" class="font-game text-xl opacity-50">.000</p></div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="flex gap-2">
-                        <div class="h-2 flex-1 bg-green-500/20"><div class="h-full bg-green-500 w-3/4"></div></div>
-                        <div class="h-2 flex-1 bg-green-500/20"><div class="h-full bg-green-500 w-1/2"></div></div>
-                        <div class="h-2 flex-1 bg-green-500/20"><div class="h-full bg-green-500 w-full"></div></div>
-                    </div>
                 </div>
+            </section>
+        </div>
+
+        <div id="page-ranking" class="page hidden p-12 overflow-y-auto h-full page-transition">
+            <h2 class="font-game text-4xl mb-12 italic text-center">LEAGUE_STANDINGS</h2>
+            <div class="max-w-4xl mx-auto bg-black/30 border border-white/10 rounded-2xl overflow-hidden">
+                <table class="w-full text-left font-game text-xs">
+                    <thead class="bg-white/5">
+                        <tr><th class="p-6">POS</th><th class="p-6">TEAM</th><th class="p-6 text-center">RECORD</th><th class="p-6 text-center text-green-500">AVG</th></tr>
+                    </thead>
+                    <tbody id="ranking-body" class="divide-y divide-white/5"></tbody>
+                </table>
             </div>
-        </section>
-    </main>
+        </div>
+
+        <div id="page-schedule" class="page hidden p-12 h-full flex items-center justify-center page-transition">
+            <div class="text-center">
+                <h2 class="font-game text-4xl mb-4 italic opacity-20">SYSTEM_OFFLINE</h2>
+                <p class="font-mono text-green-500">CALENDARIO DISPONIBLE EN PRÓXIMA ACTUALIZACIÓN</p>
+            </div>
+        </div>
+
+    </div>
 
     <script>
-        let players = [];
+        let ligaData = { jugadores: [], clasificacion: [] };
 
         async function init() {
-            try {
-                const res = await fetch('liga_data.json');
-                const data = await res.json();
-                players = data.jugadores;
-                document.getElementById('update-info').innerText = `SYS_LOAD: ${data.actualizado}`;
-                
-                const list = document.getElementById('player-list');
-                players.forEach((p, index) => {
-                    const btn = document.createElement('button');
-                    btn.className = `player-btn w-full p-4 text-left font-game text-[11px] uppercase italic bg-white/5 flex justify-between items-center`;
-                    btn.innerHTML = `<span>${p.nombre}</span> <span class="opacity-20 text-[8px]">${p.equipo}</span>`;
-                    btn.onclick = () => selectPlayer(p, btn);
-                    list.appendChild(btn);
-                    if(index === 0) selectPlayer(p, btn);
-                });
-            } catch(e) { console.error("Error cargando JSON", e); }
+            const res = await fetch('liga_data.json');
+            ligaData = await res.json();
+            document.getElementById('update-info').innerText = `>> SYNC_DATE: ${ligaData.actualizado}`;
+            renderRoster();
+        }
+
+        function changePage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active', 'text-green-500'));
+            
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            document.getElementById(`btn-${pageId}`).classList.add('active', 'text-green-500');
+
+            if(pageId === 'ranking') renderRanking();
+        }
+
+        function renderRoster() {
+            const list = document.getElementById('player-list');
+            ligaData.jugadores.forEach((p, i) => {
+                const btn = document.createElement('button');
+                btn.className = `player-btn w-full p-4 text-left font-game text-[10px] uppercase italic bg-white/5 mb-1`;
+                btn.innerHTML = p.nombre;
+                btn.onclick = () => selectPlayer(p, btn);
+                list.appendChild(btn);
+                if(i === 0) selectPlayer(p, btn);
+            });
         }
 
         function selectPlayer(p, btn) {
-    document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+            document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-    const mainPhoto = document.getElementById('main-photo');
-    mainPhoto.style.opacity = 0;
-    
-    setTimeout(() => {
-        // Limpiamos el nombre del jugador (quitamos puntos y ponemos guiones bajos)
-        let cleanName = p.nombre.replace(/\./g, '').trim().replace(/\s+/g, '_');
-        
-        // Intentamos cargar el JPG que acabas de renombrar
-        const imgPath = `fotos/jugadores/${cleanName}.jpg`;
-        
-        const tempImg = new Image();
-        tempImg.src = imgPath;
-        
-        tempImg.onload = () => {
-            mainPhoto.src = imgPath;
-            mainPhoto.style.opacity = 1;
-        };
-        
-        tempImg.onerror = () => {
-            // Si el JPG falla, intenta PNG por si acaso
-            const pngPath = `fotos/jugadores/${cleanName}.png`;
-            const tempPng = new Image();
-            tempPng.src = pngPath;
-            
-            tempPng.onload = () => {
-                mainPhoto.src = pngPath;
-                mainPhoto.style.opacity = 1;
-            };
-            
-            tempPng.onerror = () => {
-                // Si ambos fallan, silueta por defecto
-                mainPhoto.src = 'https://via.placeholder.com/600x800/020617/22c55e?text=NO_IMAGE';
-                mainPhoto.style.opacity = 1;
-            };
-        };
+            const photo = document.getElementById('main-photo');
+            photo.style.opacity = 0;
+            photo.style.transform = "scale(0.9)";
 
-        // Actualizar textos del HUD
-        document.getElementById('v-name').innerText = p.nombre.replace(/\./g, '');
-        document.getElementById('v-team').innerText = p.equipo;
-        document.getElementById('v-vs-r').innerText = p.avg_vs_r;
-        document.getElementById('v-w-r').innerText = p.avg_runners;
-        document.getElementById('v-ratio').innerText = p.ratio;
-        
-    }, 300);
-}
+            setTimeout(() => {
+                document.getElementById('v-name').innerText = p.nombre.replace(/\./g, '');
+                document.getElementById('v-team').innerText = p.equipo;
+                document.getElementById('v-vs-r').innerText = p.avg_vs_r;
+                document.getElementById('v-w-r').innerText = p.avg_runners;
+                document.getElementById('v-ratio').innerText = p.ratio;
+                document.getElementById('v-empty').innerText = p.avg_empty;
+
+                const cleanName = p.nombre.replace(/\./g, '').trim().replace(/\s+/g, '_');
+                const folder = "fotos/jugadores/";
+                
+                // Lógica de carga JPG/PNG
+                const img = new Image();
+                img.src = `${folder}${cleanName}.jpg`;
+                img.onload = () => { photo.src = img.src; photo.style.opacity = 1; };
+                img.onerror = () => {
+                    const img2 = new Image();
+                    img2.src = `${folder}${cleanName}.png`;
+                    img2.onload = () => { photo.src = img2.src; photo.style.opacity = 1; };
+                    img2.onerror = () => { photo.src = 'https://via.placeholder.com/600x800/020617/22c55e?text=NO_AVATAR'; photo.style.opacity = 1; };
+                };
+                photo.style.transform = "scale(1)";
+            }, 300);
+        }
+
+        function renderRanking() {
+            const body = document.getElementById('ranking-body');
+            body.innerHTML = '';
+            ligaData.clasificacion.forEach(e => {
+                body.innerHTML += `<tr class="hover:bg-white/5 transition"><td class="p-6 font-bold opacity-30">${e.pos}</td><td class="p-6 italic uppercase">${e.equipo}</td><td class="p-6 text-center">${e.pg}-${e.pp}</td><td class="p-6 text-center font-mono text-green-500">${e.avg}</td></tr>`;
+            });
+        }
+
         init();
     </script>
 </body>
