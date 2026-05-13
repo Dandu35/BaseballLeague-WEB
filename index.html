@@ -140,43 +140,54 @@
         }
 
         function selectPlayer(p, btn) {
-            document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-            const mainPhoto = document.getElementById('main-photo');
-            mainPhoto.style.opacity = 0;
-            mainPhoto.style.transform = "scale(0.9) translateX(20px)";
+    const mainPhoto = document.getElementById('main-photo');
+    mainPhoto.style.opacity = 0;
+    
+    setTimeout(() => {
+        // Limpiamos el nombre del jugador (quitamos puntos y ponemos guiones bajos)
+        let cleanName = p.nombre.replace(/\./g, '').trim().replace(/\s+/g, '_');
+        
+        // Intentamos cargar el JPG que acabas de renombrar
+        const imgPath = `fotos/jugadores/${cleanName}.jpg`;
+        
+        const tempImg = new Image();
+        tempImg.src = imgPath;
+        
+        tempImg.onload = () => {
+            mainPhoto.src = imgPath;
+            mainPhoto.style.opacity = 1;
+        };
+        
+        tempImg.onerror = () => {
+            // Si el JPG falla, intenta PNG por si acaso
+            const pngPath = `fotos/jugadores/${cleanName}.png`;
+            const tempPng = new Image();
+            tempPng.src = pngPath;
             
-            setTimeout(() => {
-                document.getElementById('v-name').innerText = p.nombre;
-                document.getElementById('v-team').innerText = p.equipo;
-                document.getElementById('v-vs-r').innerText = p.avg_vs_r;
-                document.getElementById('v-w-r').innerText = p.avg_runners;
-                document.getElementById('v-empty').innerText = p.avg_empty;
-                document.getElementById('v-ratio').innerText = p.ratio;
-                
-                // Lógica de carga de imagen dual (PNG -> JPG)
-                const folder = "fotos/jugadores/";
-                const fileName = p.nombre.replace(/\s+/g, '_');
-                const pngPath = `${folder}${fileName}.png`;
-                const jpgPath = `${folder}${fileName}.jpg`;
-
-                // Intentar PNG, si falla probar JPG
-                const tempImg = new Image();
-                tempImg.src = pngPath;
-                tempImg.onload = () => { mainPhoto.src = pngPath; };
-                tempImg.onerror = () => { 
-                    const tempJpg = new Image();
-                    tempJpg.src = jpgPath;
-                    tempJpg.onload = () => { mainPhoto.src = jpgPath; };
-                    tempJpg.onerror = () => { mainPhoto.src = 'https://via.placeholder.com/600x800/020617/22c55e?text=NO_AVATAR'; };
-                };
-
+            tempPng.onload = () => {
+                mainPhoto.src = pngPath;
                 mainPhoto.style.opacity = 1;
-                mainPhoto.style.transform = "scale(1) translateX(0)";
-            }, 300);
-        }
+            };
+            
+            tempPng.onerror = () => {
+                // Si ambos fallan, silueta por defecto
+                mainPhoto.src = 'https://via.placeholder.com/600x800/020617/22c55e?text=NO_IMAGE';
+                mainPhoto.style.opacity = 1;
+            };
+        };
 
+        // Actualizar textos del HUD
+        document.getElementById('v-name').innerText = p.nombre.replace(/\./g, '');
+        document.getElementById('v-team').innerText = p.equipo;
+        document.getElementById('v-vs-r').innerText = p.avg_vs_r;
+        document.getElementById('v-w-r').innerText = p.avg_runners;
+        document.getElementById('v-ratio').innerText = p.ratio;
+        
+    }, 300);
+}
         init();
     </script>
 </body>
