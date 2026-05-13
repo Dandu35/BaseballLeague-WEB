@@ -5,24 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>FN HUB | Elite Scouting</title>
+    <title>FN HUB | League Analytics</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;700&display=swap');
-        body { background: radial-gradient(circle at center, #1e293b 0%, #020617 100%); font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden; color: white; }
+        body { background: radial-gradient(circle at center, #111827 0%, #020617 100%); font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden; color: white; }
         .font-game { font-family: 'Orbitron', sans-serif; }
         .nav-btn.active { color: #22c55e; border-bottom: 2px solid #22c55e; }
-        .player-btn { clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); transition: all 0.3s ease; border-left: 0px solid #22c55e; }
-        .player-btn.active { background: #22c55e; color: black; transform: translateX(10px); border-left: 6px solid white; }
-        .pos-filter { cursor: pointer; transition: 0.2s; opacity: 0.4; font-size: 8px; font-family: 'Orbitron'; letter-spacing: 1px; }
-        .pos-filter.active { opacity: 1; color: #22c55e; border-bottom: 1px solid #22c55e; }
+        .player-btn { clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); transition: all 0.3s; margin-bottom: 2px; }
+        .player-btn.active { background: #22c55e; color: black; transform: translateX(10px); }
         .custom-scrollbar::-webkit-scrollbar { width: 3px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #22c55e; }
     </style>
 </head>
 <body class="flex flex-col">
 
-    <nav class="flex gap-4 p-4 bg-black/60 border-b border-white/10 z-[100] backdrop-blur-md">
-        <div class="flex items-center gap-2 mr-6 text-green-500 font-game text-xs italic">SYSTEM_v3.0</div>
+    <nav class="flex gap-6 p-4 bg-black/60 border-b border-white/5 z-[100] backdrop-blur-md items-center">
+        <div class="text-green-500 font-game text-xs mr-4 italic">FN_ANALYTICS_v4</div>
         <button onclick="changePage('home')" class="nav-btn px-4 py-2 font-game text-[10px] active" id="btn-home">HOME</button>
         <button onclick="changePage('roster')" class="nav-btn px-4 py-2 font-game text-[10px]" id="btn-roster">ROSTER</button>
         <button onclick="changePage('ranking')" class="nav-btn px-4 py-2 font-game text-[10px]" id="btn-ranking">RANKING</button>
@@ -30,53 +28,45 @@
 
     <div class="flex-1 overflow-hidden relative">
 
-        <div id="page-home" class="page p-12 h-full">
-            <h2 class="font-game text-5xl mb-4 italic uppercase">Elite_Access</h2>
-            <p id="update-info" class="text-green-500 font-mono text-[9px] mb-8"></p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-                <div class="bg-white/5 p-8 border-l-4 border-green-500">
-                    <h3 class="font-game text-sm mb-2 italic">MULTI-ROLE DETECTION</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">Identificación automática de jugadores de doble vía (Two-Way). Análisis situacional sincronizado por equipo.</p>
-                </div>
-            </div>
-        </div>
-
         <div id="page-roster" class="page hidden h-full flex overflow-hidden">
             <aside class="w-1/4 flex flex-col p-6 bg-black/40 border-r border-white/5">
                 <div class="flex justify-between mb-4 border-b border-white/10 pb-4">
-                    <button onclick="filterPos('ALL')" class="pos-filter active" id="f-all">ALL</button>
-                    <button onclick="filterPos('PITCHER')" class="pos-filter" id="f-pitcher">PIT</button>
-                    <button onclick="filterPos('INFIELD')" class="pos-filter" id="f-infield">BAT</button>
-                    <button onclick="filterPos('TWO-WAY')" class="pos-filter" id="f-two-way">UTL</button>
+                    <button onclick="filterPos('ALL')" class="text-[9px] font-game opacity-50 hover:opacity-100" id="f-all">ALL</button>
+                    <button onclick="filterPos('PITCHER')" class="text-[9px] font-game opacity-50 hover:opacity-100" id="f-pitcher">PIT</button>
+                    <button onclick="filterPos('BATTER')" class="text-[9px] font-game opacity-50 hover:opacity-100" id="f-batter">BAT</button>
                 </div>
-                <div id="player-list" class="flex-1 overflow-y-auto custom-scrollbar space-y-1"></div>
+                <div id="player-list" class="flex-1 overflow-y-auto custom-scrollbar"></div>
             </aside>
 
-            <section class="flex-1 relative flex items-center justify-center p-10">
-                <div class="relative z-10 flex w-full h-full items-center gap-8">
-                    <div class="w-2/5 flex justify-center h-full">
-                        <img id="main-photo" src="" class="h-[85%] object-contain transition-all duration-500 drop-shadow-[0_0_35px_rgba(34,197,94,0.2)]">
-                    </div>
-                    <div class="w-3/5 space-y-6">
+            <section class="flex-1 relative flex items-center justify-center p-8">
+                <div class="relative z-10 flex w-full h-full items-center gap-6">
+                    <div class="w-1/3 flex justify-center"><img id="main-photo" src="" class="h-[80vh] object-contain transition-all duration-500 drop-shadow-[0_0_30px_rgba(34,197,94,0.2)]"></div>
+                    
+                    <div class="w-2/3 space-y-4">
                         <header>
-                            <span id="v-team" class="text-[9px] font-game text-green-500 tracking-[0.4em] mb-2 block uppercase"></span>
-                            <h2 id="v-name" class="font-game text-5xl font-black italic uppercase leading-none pb-4 border-b border-white/10">---</h2>
-                            <span id="v-pos" class="inline-block px-3 py-1 text-black font-black text-[9px] mt-4 skew-x-[-15deg]">ROLE: ---</span>
+                            <span id="v-team" class="text-[9px] font-game text-green-500 mb-1 block uppercase"></span>
+                            <h2 id="v-name" class="font-game text-4xl font-black italic uppercase leading-none border-b border-white/10 pb-2">---</h2>
+                            <div id="v-pos" class="inline-block px-3 py-0.5 bg-green-500 text-black font-black text-[9px] mt-2 skew-x-[-15deg]">---</div>
                         </header>
-                        <div class="bg-black/60 p-8 rounded-[40px] border border-white/5 grid grid-cols-2 gap-8 shadow-2xl backdrop-blur-md">
-                            <canvas id="radarChart"></canvas>
-                            <div class="flex flex-col justify-center space-y-6">
-                                <div class="bg-slate-900/80 p-4 border-r-4 border-green-500 text-right">
-                                    <p id="label-vs-r" class="text-[8px] text-slate-500 uppercase font-bold mb-1">VS RIGHT AVG</p>
-                                    <p id="v-vs-r" class="font-game text-3xl">.000</p>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/5 p-6 rounded-3xl border border-white/5">
+                                <h4 class="text-[9px] font-game text-yellow-500 mb-4 tracking-widest uppercase">Season_Totals</h4>
+                                <div class="grid grid-cols-3 gap-y-4 gap-x-2 text-center">
+                                    <div><p class="text-[8px] opacity-40">AB</p><p id="t-ab" class="font-game text-lg">0</p></div>
+                                    <div><p class="text-[8px] opacity-40">HITS</p><p id="t-h" class="font-game text-lg text-green-400">0</p></div>
+                                    <div><p class="text-[8px] opacity-40">RBI</p><p id="t-rbi" class="font-game text-lg text-blue-400">0</p></div>
+                                    <div><p class="text-[8px] opacity-40">SO</p><p id="t-so" class="font-game text-lg text-red-500">0</p></div>
+                                    <div><p class="text-[8px] opacity-40 text-red-300">KL</p><p id="t-kl" class="font-game text-lg text-red-300">0</p></div>
+                                    <div><p class="text-[8px] opacity-40">LOB</p><p id="t-lob" class="font-game text-lg text-purple-400">0</p></div>
                                 </div>
-                                <div class="bg-slate-900/80 p-4 border-r-4 border-blue-500 text-right">
-                                    <p id="label-clutch" class="text-[8px] text-slate-500 uppercase font-bold mb-1">CLUTCH (w/R)</p>
-                                    <p id="v-w-r" class="font-game text-3xl text-green-500">.000</p>
-                                </div>
-                                <div class="flex justify-around pt-4 border-t border-white/10 opacity-30 text-[8px]">
-                                    <div class="text-center"><p>FLY/GND</p><p id="v-ratio" class="font-game text-sm text-white">0.0</p></div>
-                                    <div class="text-center"><p>EMPTY</p><p id="v-empty" class="font-game text-sm text-white">.000</p></div>
+                            </div>
+
+                            <div class="bg-black/60 p-6 rounded-3xl border border-white/10">
+                                <canvas id="radarChart" class="mb-4"></canvas>
+                                <div class="flex justify-around text-center border-t border-white/5 pt-4">
+                                    <div><p class="text-[8px] opacity-40">AVG</p><p id="v-avg" class="font-game text-xl text-green-500">.000</p></div>
+                                    <div><p class="text-[8px] opacity-40">CLUTCH</p><p id="v-clutch" class="font-game text-lg">.000</p></div>
                                 </div>
                             </div>
                         </div>
@@ -85,47 +75,41 @@
             </section>
         </div>
 
-        <div id="page-ranking" class="page hidden p-12 overflow-y-auto h-full">
-            <h2 class="font-game text-4xl mb-12 italic text-center">LEAGUE_STANDINGS</h2>
-            <div id="ranking-container" class="max-w-4xl mx-auto bg-black/40 rounded-3xl border border-white/5 overflow-hidden"></div>
+        <div id="page-home" class="page p-12 h-full flex flex-col justify-center">
+            <h1 class="font-game text-7xl italic font-black mb-4">BASEBALL_HUB</h1>
+            <p id="update-info" class="font-mono text-green-500 text-sm mb-12"></p>
+            <div class="max-w-2xl bg-white/5 p-8 border-l-4 border-green-500"><p class="text-slate-400 italic">Sincronización total activa. Datos situacionales y acumulados disponibles para el Grupo Norte.</p></div>
         </div>
+
+        <div id="page-ranking" class="page hidden p-12 overflow-y-auto h-full"><div id="ranking-body" class="max-w-4xl mx-auto"></div></div>
     </div>
 
     <script>
         let ligaData = { jugadores: [], clasificacion: [] };
         let radarChart = null;
-        let currentPosFilter = 'ALL';
 
         async function init() {
             const res = await fetch('liga_data.json');
             ligaData = await res.json();
-            document.getElementById('update-info').innerText = `>> SYSTEM_SYNC_COMPLETE: ${ligaData.actualizado}`;
+            document.getElementById('update-info').innerText = `>> SYS_READY: ${ligaData.actualizado}`;
             renderRoster();
         }
 
-        function changePage(pId) {
+        function changePage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`page-${pId}`).classList.remove('hidden');
-            document.getElementById(`btn-${pId}`).classList.add('active');
-            if(pId === 'ranking') renderRanking();
-        }
-
-        function filterPos(pos) {
-            currentPosFilter = pos;
-            document.querySelectorAll('.pos-filter').forEach(b => b.classList.remove('active'));
-            document.getElementById(`f-${pos.toLowerCase().replace('-','')}`).classList.add('active');
-            renderRoster();
+            document.getElementById(`page-${id}`).classList.remove('hidden');
+            document.getElementById(`btn-${id}`).classList.add('active');
+            if(id === 'ranking') renderRanking();
         }
 
         function renderRoster() {
             const list = document.getElementById('player-list');
             list.innerHTML = '';
-            const filtered = ligaData.jugadores.filter(p => currentPosFilter === 'ALL' || p.posicion === currentPosFilter);
-            filtered.forEach((p, i) => {
+            ligaData.jugadores.forEach((p, i) => {
                 const btn = document.createElement('button');
-                btn.className = `player-btn w-full p-4 text-left font-game text-[9px] uppercase italic bg-white/5 mb-1 flex justify-between items-center`;
-                btn.innerHTML = `<span>${p.nombre.replace(/\./g, '')}</span> <span class="opacity-20 text-[7px]">${p.posicion}</span>`;
+                btn.className = `player-btn w-full p-4 text-left font-game text-[9px] uppercase italic bg-white/5`;
+                btn.innerHTML = p.nombre;
                 btn.onclick = () => selectPlayer(p, btn);
                 list.appendChild(btn);
                 if(i === 0) selectPlayer(p, btn);
@@ -135,49 +119,37 @@
         function selectPlayer(p, btn) {
             document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+
+            // Actualización de textos
+            document.getElementById('v-name').innerText = p.nombre.replace(/\./g, '');
+            document.getElementById('v-team').innerText = p.equipo;
+            document.getElementById('v-pos').innerText = `ROLE: ${p.posicion}`;
+            document.getElementById('v-avg').innerText = p.avg || '.000';
+            document.getElementById('v-clutch').innerText = p.clutch || '.000';
+            
+            // Totales
+            document.getElementById('t-ab').innerText = p.ab || '0';
+            document.getElementById('t-h').innerText = p.h || '0';
+            document.getElementById('t-rbi').innerText = p.rbi || '0';
+            document.getElementById('t-so').innerText = p.so || '0';
+            document.getElementById('t-kl').innerText = p.kl || '0';
+            document.getElementById('t-lob').innerText = p.lob || '0';
+
+            // Foto
             const photo = document.getElementById('main-photo');
-            photo.style.opacity = 0;
+            const file = p.nombre.replace(/\./g, '').trim().replace(/\s+/g, '_');
+            photo.src = `fotos/jugadores/${file}.jpg`;
+            photo.onerror = () => { photo.src = `fotos/jugadores/${file}.png`; };
 
-            setTimeout(() => {
-                const nameClean = p.nombre.replace(/\./g, '');
-                document.getElementById('v-name').innerText = nameClean;
-                document.getElementById('v-team').innerText = p.equipo;
-                document.getElementById('v-vs-r').innerText = p.avg_vs_r;
-                document.getElementById('v-w-r').innerText = p.avg_runners;
-                document.getElementById('v-empty').innerText = p.avg_empty;
-                document.getElementById('v-ratio').innerText = p.ratio;
-
-                const vPos = document.getElementById('v-pos');
-                const lblR = document.getElementById('label-vs-r');
-                const lblC = document.getElementById('label-clutch');
-
-                // ESTILOS POR ROL
-                if(p.posicion === "TWO-WAY") {
-                    vPos.innerText = "ROLE: TWO-WAY PLAYER";
-                    vPos.className = "inline-block px-3 py-1 bg-yellow-500 text-black font-black text-[9px] mt-4 skew-x-[-15deg]";
-                    lblR.innerText = "BAT AVG VS R";
-                } else if(p.posicion === "PITCHER") {
-                    vPos.innerText = "ROLE: PITCHER";
-                    vPos.className = "inline-block px-3 py-1 bg-blue-500 text-black font-black text-[9px] mt-4 skew-x-[-15deg]";
-                    lblR.innerText = "OPP AVG VS R";
-                } else {
-                    vPos.innerText = "ROLE: BATTER";
-                    vPos.className = "inline-block px-3 py-1 bg-green-500 text-black font-black text-[9px] mt-4 skew-x-[-15deg]";
-                    lblR.innerText = "VS RIGHT AVG";
-                }
-
-                const file = nameClean.trim().replace(/\s+/g, '_');
-                photo.src = `fotos/jugadores/${file}.jpg`;
-                photo.onerror = () => { photo.src = `fotos/jugadores/${file}.png`; };
-                photo.style.opacity = 1;
-
-                updateRadar([normalize(p.avg_empty), normalize(p.avg_runners), normalize(p.avg_vs_r), parseFloat(p.ratio)*35, 80]);
-            }, 250);
+            // Radar
+            const rData = [normalize(p.avg), normalize(p.clutch), normalize(p.vs_r), (parseFloat(p.ratio)||0)*30, 80];
+            updateRadar(rData);
         }
 
         function normalize(val) {
+            if(!val) return 15;
             let v = parseFloat(val.replace('.', '0.'));
-            return isNaN(v) ? 15 : Math.min(Math.max((v / 0.450) * 100, 15), 95);
+            return Math.min(Math.max((v / 0.450) * 100, 15), 95);
         }
 
         function updateRadar(stats) {
@@ -197,10 +169,10 @@
         }
 
         function renderRanking() {
-            const container = document.getElementById('ranking-container');
-            container.innerHTML = `<table class="w-full text-left font-game text-[10px] uppercase">
+            const body = document.getElementById('ranking-body');
+            body.innerHTML = `<table class="w-full text-left font-game text-[10px] uppercase">
                 <thead class="bg-white/5"><tr><th class="p-6">POS</th><th class="p-6">TEAM</th><th class="p-6">W-L</th><th class="p-6 text-green-500">AVG</th></tr></thead>
-                <tbody class="divide-y divide-white/5">${ligaData.clasificacion.map(e => `<tr><td class="p-6 opacity-30">${e.pos}</td><td class="p-6 italic">${e.equipo}</td><td class="p-6 text-center">${e.pg}-${e.pp}</td><td class="p-6 text-center font-mono text-green-500">${e.avg}</td></tr>`).join('')}</tbody></table>`;
+                <tbody class="divide-y divide-white/5">${ligaData.clasificacion.map(e => `<tr><td class="p-6 opacity-30">${e.pos}</td><td class="p-6 italic">${e.equipo}</td><td class="p-6">${e.pg}-${e.pp}</td><td class="p-6 text-green-500 font-mono">${e.avg}</td></tr>`).join('')}</tbody></table>`;
         }
 
         init();
