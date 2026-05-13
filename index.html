@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>FN HUB | Player Selection</title>
+    <title>FN HUB | Player Selection 2026</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;700&display=swap');
         
@@ -18,90 +18,99 @@
 
         .font-game { font-family: 'Orbitron', sans-serif; }
 
-        /* Efecto de escaneo tipo videojuego */
         .scanline {
             width: 100%; height: 100px;
-            background: linear-gradient(0deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+            background: linear-gradient(0deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
             position: absolute; top: -100px; left: 0;
             animation: scan 4s linear infinite;
+            pointer-events: none;
         }
         @keyframes scan { 0% { top: -100px; } 100% { top: 100%; } }
 
         .player-btn {
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
-            transition: all 0.2s ease;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 0px solid #22c55e;
         }
         .player-btn:hover, .player-btn.active {
-            background: #22c55e;
+            background: rgba(34, 197, 94, 0.9);
             color: black;
-            transform: translateX(10px);
+            transform: translateX(15px);
+            border-left: 8px solid white;
         }
 
-        #player-image {
-            mask-image: linear-gradient(to right, black 60%, transparent 100%);
-            transition: all 0.5s ease;
+        #main-photo {
+            transition: opacity 0.4s ease, transform 0.5s ease;
         }
+
+        /* Scrollbar estilo retro */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #22c55e; }
     </style>
 </head>
 <body class="flex flex-col">
 
     <div class="scanline"></div>
 
-    <header class="p-8 flex justify-between items-center border-b border-green-500/30">
-        <div>
-            <h1 class="font-game text-3xl font-black italic tracking-widest text-green-500">PLAYER_SELECT.v2</h1>
-            <p id="update-info" class="text-[10px] font-mono opacity-50 uppercase tracking-tighter"></p>
+    <header class="p-6 flex justify-between items-center border-b border-white/10 glass z-50">
+        <div class="flex items-center gap-4">
+            <div class="bg-green-500 text-black font-black px-2 py-1 font-game italic">LVL 26</div>
+            <h1 class="font-game text-2xl font-black italic tracking-widest">PLAYER<span class="text-green-500">_STAT</span></h1>
         </div>
-        <div class="text-right">
-            <span class="text-xs font-bold text-slate-500 uppercase">League Status</span>
-            <div class="flex items-center gap-2 justify-end">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span class="font-game text-sm uppercase">Online</span>
-            </div>
-        </div>
+        <div id="update-info" class="text-[9px] font-mono opacity-40 uppercase"></div>
     </header>
 
     <main class="flex-1 flex overflow-hidden">
         
-        <aside class="w-1/3 p-8 overflow-y-auto border-r border-green-500/10 space-y-2 custom-scrollbar">
-            <div id="player-list" class="space-y-3">
-                </div>
+        <aside class="w-1/3 p-6 overflow-y-auto custom-scrollbar bg-black/20">
+            <div class="mb-6 border-b border-white/10 pb-2">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest italic">Roster_Database</p>
+            </div>
+            <div id="player-list" class="space-y-2"></div>
         </aside>
 
-        <section id="character-viewer" class="flex-1 relative flex items-center justify-center p-12 bg-slate-900/20">
+        <section class="flex-1 relative overflow-hidden flex items-center justify-center">
             
-            <div class="absolute left-0 top-0 w-full h-full opacity-40 z-0 overflow-hidden">
-                <img id="bg-photo" src="" class="w-full h-full object-cover filter blur-xl">
-            </div>
+            <div class="absolute w-[500px] h-[500px] bg-green-500/10 blur-[120px] rounded-full"></div>
 
-            <div class="relative z-10 flex w-full h-full items-center">
-                <div class="w-1/2 h-full flex items-center justify-center">
-                    <img id="main-photo" src="" class="h-[80%] object-contain drop-shadow-[0_0_50px_rgba(34,197,94,0.3)]">
+            <div class="relative z-10 flex w-full h-full items-center px-12">
+                
+                <div class="w-1/2 h-full flex items-center justify-center relative">
+                    <img id="main-photo" src="" class="h-[85%] object-contain z-10">
                 </div>
 
-                <div class="w-1/2 space-y-8 animate-fade-in">
+                <div class="w-1/2 space-y-8">
                     <div>
-                        <p id="v-team" class="font-game text-green-500 text-sm tracking-widest mb-1"></p>
-                        <h2 id="v-name" class="font-game text-6xl font-black italic uppercase leading-none border-b-4 border-white inline-block pb-2">---</h2>
+                        <div id="v-team" class="inline-block px-3 py-1 bg-white/10 text-xs font-bold mb-4 skew-x-[-15deg]"></div>
+                        <h2 id="v-name" class="font-game text-5xl font-black italic uppercase leading-none block">---</h2>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-black/60 p-6 border-l-4 border-green-500">
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1 italic">AVG vs Right</p>
-                            <p id="v-vs-r" class="font-game text-4xl text-white">.000</p>
+                    <div class="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
+                        <div class="bg-slate-900/80 p-6">
+                            <p class="text-[10px] text-green-500 font-bold uppercase mb-2">VS_RIGHT_AVG</p>
+                            <p id="v-vs-r" class="font-game text-4xl">---</p>
                         </div>
-                        <div class="bg-black/60 p-6 border-l-4 border-blue-500">
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1 italic">w/ Runners</p>
-                            <p id="v-w-r" class="font-game text-4xl text-white">.000</p>
+                        <div class="bg-slate-900/80 p-6">
+                            <p class="text-[10px] text-blue-400 font-bold uppercase mb-2">RUNNERS_ON</p>
+                            <p id="v-w-r" class="font-game text-4xl">---</p>
                         </div>
-                        <div class="bg-black/60 p-6 border-l-4 border-slate-500 col-span-2">
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1 italic">Fly/Gnd Ratio</p>
-                            <p id="v-ratio" class="font-game text-4xl text-white text-center">0.0</p>
+                        <div class="bg-slate-900/80 p-6 col-span-2 flex justify-between items-center">
+                            <div>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase mb-1">FLY/GND_RATIO</p>
+                                <p id="v-ratio" class="font-game text-2xl text-white">0.0</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] text-slate-500 font-bold uppercase mb-1">EMPTY_AVG</p>
+                                <p id="v-empty" class="font-game text-xl opacity-50">.000</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="bg-green-500 text-black font-black p-2 text-center uppercase tracking-[0.5em] italic">
-                        Advanced Scouting Active
+                    <div class="flex gap-2">
+                        <div class="h-2 flex-1 bg-green-500/20"><div class="h-full bg-green-500 w-3/4"></div></div>
+                        <div class="h-2 flex-1 bg-green-500/20"><div class="h-full bg-green-500 w-1/2"></div></div>
+                        <div class="h-2 flex-1 bg-green-500/20"><div class="h-full bg-green-500 w-full"></div></div>
                     </div>
                 </div>
             </div>
@@ -112,52 +121,60 @@
         let players = [];
 
         async function init() {
-            const res = await fetch('liga_data.json');
-            const data = await res.json();
-            players = data.jugadores;
-            document.getElementById('update-info').innerText = `DATA_REFRESH: ${data.actualizado}`;
-            
-            const list = document.getElementById('player-list');
-            players.forEach((p, index) => {
-                const btn = document.createElement('button');
-                btn.className = `player-btn w-full p-4 text-left font-game text-sm uppercase italic bg-slate-800/40 border-r-4 border-transparent`;
-                btn.innerHTML = `<span class="opacity-30 mr-2 text-[10px]">0${index+1}</span> ${p.nombre}`;
-                btn.onclick = () => selectPlayer(p, btn);
-                list.appendChild(btn);
+            try {
+                const res = await fetch('liga_data.json');
+                const data = await res.json();
+                players = data.jugadores;
+                document.getElementById('update-info').innerText = `SYS_LOAD: ${data.actualizado}`;
                 
-                // Seleccionar el primero por defecto
-                if(index === 0) selectPlayer(p, btn);
-            });
+                const list = document.getElementById('player-list');
+                players.forEach((p, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = `player-btn w-full p-4 text-left font-game text-[11px] uppercase italic bg-white/5 flex justify-between items-center`;
+                    btn.innerHTML = `<span>${p.nombre}</span> <span class="opacity-20 text-[8px]">${p.equipo}</span>`;
+                    btn.onclick = () => selectPlayer(p, btn);
+                    list.appendChild(btn);
+                    if(index === 0) selectPlayer(p, btn);
+                });
+            } catch(e) { console.error("Error cargando JSON", e); }
         }
 
         function selectPlayer(p, btn) {
-            // Animación de cambio
             document.querySelectorAll('.player-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             const mainPhoto = document.getElementById('main-photo');
-            const bgPhoto = document.getElementById('bg-photo');
-            
-            // Efecto de parpadeo al cambiar
             mainPhoto.style.opacity = 0;
+            mainPhoto.style.transform = "scale(0.9) translateX(20px)";
             
             setTimeout(() => {
                 document.getElementById('v-name').innerText = p.nombre;
                 document.getElementById('v-team').innerText = p.equipo;
                 document.getElementById('v-vs-r').innerText = p.avg_vs_r;
                 document.getElementById('v-w-r').innerText = p.avg_runners;
+                document.getElementById('v-empty').innerText = p.avg_empty;
                 document.getElementById('v-ratio').innerText = p.ratio;
                 
-                // URL de la foto (si no existe, usa un placeholder de silueta)
-                const imgPath = `fotos/jugadores/${p.nombre.replace(' ', '_')}.png`;
-                mainPhoto.src = imgPath;
-                bgPhoto.src = imgPath;
-                
-                // Manejo de error si la foto no existe
-                mainPhoto.onerror = () => { mainPhoto.src = 'https://via.placeholder.com/600x800/020617/22c55e?text=NO_IMAGE'; };
+                // Lógica de carga de imagen dual (PNG -> JPG)
+                const folder = "fotos/jugadores/";
+                const fileName = p.nombre.replace(/\s+/g, '_');
+                const pngPath = `${folder}${fileName}.png`;
+                const jpgPath = `${folder}${fileName}.jpg`;
+
+                // Intentar PNG, si falla probar JPG
+                const tempImg = new Image();
+                tempImg.src = pngPath;
+                tempImg.onload = () => { mainPhoto.src = pngPath; };
+                tempImg.onerror = () => { 
+                    const tempJpg = new Image();
+                    tempJpg.src = jpgPath;
+                    tempJpg.onload = () => { mainPhoto.src = jpgPath; };
+                    tempJpg.onerror = () => { mainPhoto.src = 'https://via.placeholder.com/600x800/020617/22c55e?text=NO_AVATAR'; };
+                };
 
                 mainPhoto.style.opacity = 1;
-            }, 200);
+                mainPhoto.style.transform = "scale(1) translateX(0)";
+            }, 300);
         }
 
         init();
