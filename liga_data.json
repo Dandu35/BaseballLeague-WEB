@@ -1,5 +1,5 @@
 {
-    "actualizado": "16/05/2026 01:30",
+    "actualizado": "17/05/2026 01:47",
     "clasificacion": [
         {
             "pos": "1",
@@ -18,9 +18,9 @@
         {
             "pos": "3",
             "equipo": "CD AMAYA",
-            "pg": "3",
+            "pg": "4",
             "pp": "3",
-            "avg": "500"
+            "avg": "571"
         },
         {
             "pos": "4",
@@ -40,8 +40,8 @@
             "pos": "6",
             "equipo": "SAN INAZIO",
             "pg": "1",
-            "pp": "4",
-            "avg": "200"
+            "pp": "5",
+            "avg": "167"
         }
     ],
     "jugadores": [
