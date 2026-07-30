@@ -1,49 +1,6 @@
 {
-    "actualizado": "29/07/2026 01:17",
-    "clasificacion": [
-        {
-            "pos": "1",
-            "equipo": "CBS TOROS",
-            "pg": "9",
-            "pp": "1",
-            "avg": "900"
-        },
-        {
-            "pos": "2",
-            "equipo": "CD AMAYA",
-            "pg": "7",
-            "pp": "3",
-            "avg": "700"
-        },
-        {
-            "pos": "3",
-            "equipo": "CAD IRABIA",
-            "pg": "6",
-            "pp": "4",
-            "avg": "600"
-        },
-        {
-            "pos": "4",
-            "equipo": "CD ARGA",
-            "pg": "3",
-            "pp": "6",
-            "avg": "333"
-        },
-        {
-            "pos": "5",
-            "equipo": "CBS MIRALBUENO",
-            "pg": "3",
-            "pp": "7",
-            "avg": "300"
-        },
-        {
-            "pos": "6",
-            "equipo": "SAN INAZIO",
-            "pg": "1",
-            "pp": "8",
-            "avg": "111"
-        }
-    ],
+    "actualizado": "30/07/2026 01:10",
+    "clasificacion": [],
     "jugadores": [
         {
             "nombre": "TABAR Lander....",
